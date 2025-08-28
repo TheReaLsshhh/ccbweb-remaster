@@ -77,7 +77,7 @@ const Admissions = () => {
       <section className={`admissions-hero ${!isTopBarVisible ? 'navbar-collapsed' : ''}`}>
         <div className="container">
           <div className="hero-content">
-            <h1 className="hero-title">Admissions</h1>
+            <h1 className="hero-title">Admissions Admissions</h1>
             <p className="hero-subtitle">Begin your journey to academic excellence at City College of Bayawan</p>
             <p className="hero-motto">Your future starts here with quality education and endless opportunities</p>
           </div>

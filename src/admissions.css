@@ -114,7 +114,9 @@
 
 .requirement-item {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 20px;
   background: #fff;
   padding: 30px;
@@ -439,7 +441,7 @@
 @media (max-width: 768px) {
   .admissions-hero {
     padding: 100px 0 60px;
-    height: 350px !important;
+    height: 445px !important;
   }
 
   .admissions-hero .hero-title {
@@ -514,8 +516,8 @@
 
 @media (max-width: 480px) {
   .admissions-hero {
-    padding: 80px 0 50px;
-    height: 300px !important;
+    padding: 100px 0 60px;
+    height: 445px !important;
   }
 
   .admissions-hero .hero-title {
@@ -600,5 +602,6 @@
   outline: none;
   box-shadow: 0 0 0 3px rgba(45, 90, 45, 0.3);
 }
+
 
 

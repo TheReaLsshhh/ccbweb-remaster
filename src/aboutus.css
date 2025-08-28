@@ -580,6 +580,11 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .about-hero {
+    padding: 100px 0 60px;
+    height: 445px !important;
+  }
+
   .about-hero .hero-title {
     font-size: 2.5rem;
   }
@@ -649,6 +654,7 @@
 @media (max-width: 480px) {
   .about-hero {
     padding: 100px 0 60px;
+    height: 445px !important;
   }
   
   .about-hero .hero-title {
