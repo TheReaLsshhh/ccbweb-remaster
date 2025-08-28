@@ -7,7 +7,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
   scroll-behavior: smooth;
-  scroll-padding-top: 120px; /* Account for fixed navbar height */
+  scroll-padding-top: 88px; /* Account for both navbars when visible (40px + 48px) */
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  body {
+    scroll-padding-top: 104px; /* Account for mobile orange bar (56px) + green navbar (48px) */
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    scroll-padding-top: 100px; /* Account for smaller mobile orange bar (52px) + green navbar (48px) */
+  }
 }
 
 code {
@@ -22,22 +35,7 @@ code {
 .App {
   text-align: center;
   min-height: 100vh;
-  background-image: url('../public/images/bg.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   position: relative;
-}
-
-.App::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(128, 128, 128, 0.6);
-  z-index: 1;
 }
 
 .App > * {
@@ -181,12 +179,59 @@ code {
 
 /* Home Section */
 .home-section {
+  max-height: 100%;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding-top: 120px;
+  padding-top: 88px; /* Account for both navbars when visible (40px + 48px) */
+  background-image: url('../public/images/bg2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Adjust padding when top bar is hidden */
+.home-section.navbar-collapsed {
+  padding-top: 60px; /* Reduced padding when only green navbar is visible (expanded green navbar height) */
+}
+
+/* Mobile responsive adjustments for home section */
+@media (max-width: 768px) {
+  .home-section {
+    padding-top: 104px; /* Account for mobile orange bar (56px) + green navbar (48px) */
+  }
+  
+  .home-section.navbar-collapsed {
+    padding-top: 60px; /* Same as desktop when collapsed */
+  }
+}
+
+@media (max-width: 480px) {
+  .home-section {
+    padding-top: 100px; /* Account for smaller mobile orange bar (52px) + green navbar (48px) */
+  }
+  
+  .home-section.navbar-collapsed {
+    padding-top: 60px; /* Same as desktop when collapsed */
+  }
+}
+
+.home-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(128, 128, 128, 0.4);
+  z-index: 1;
+}
+
+.home-section .container {
+  position: relative;
+  z-index: 2;
 }
 
 .hero-content {
@@ -199,14 +244,24 @@ code {
   color: #2d5a2d;
   margin-bottom: 1rem;
   line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-subtitle {
   font-size: 1.5rem;
   color: #ff8c00;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   font-style: italic;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.hero-motto {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 2rem;
+  font-style: italic;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .hero-description {
@@ -221,6 +276,7 @@ code {
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
+  margin-top: 34rem;
 }
 
 @keyframes fadeInUp {
@@ -304,6 +360,68 @@ code {
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(45, 90, 45, 0.3);
+}
+
+/* Section CTA Buttons */
+.section-cta {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 2rem 0;
+}
+
+.section-cta .btn {
+  font-size: 1.1rem;
+  padding: 15px 35px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.section-cta .btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.section-cta .btn:hover::before {
+  left: 100%;
+}
+
+.section-cta .btn-primary {
+  background-color: #2d5a2d;
+  color: white;
+  border-color: #2d5a2d;
+}
+
+.section-cta .btn-primary:hover {
+  background-color: #1e3d1e;
+  border-color: #1e3d1e;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(45, 90, 45, 0.3);
+}
+
+.section-cta .btn-secondary {
+  background-color: transparent;
+  color: #2d5a2d;
+  border-color: #2d5a2d;
+}
+
+.section-cta .btn-secondary:hover {
+  background-color: #2d5a2d;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(45, 90, 45, 0.3);
 }
 
 /* Academic Programs Section */
@@ -418,11 +536,13 @@ code {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  text-align: left;
 }
 
 .step {
-  display: flex;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  align-items: start;
   gap: 1rem;
 }
 
@@ -437,11 +557,12 @@ code {
   justify-content: center;
   font-weight: bold;
   flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .step-content h4 {
   color: #2d5a2d;
-  margin-bottom: 0.5rem;
+  margin: 0 0 0.5rem 0;
   font-weight: bold;
 }
 
@@ -453,7 +574,8 @@ code {
 
 /* News & Events Section */
 .news-section {
-  background-color: rgba(255, 255, 255, 0.9);
+  /* Inspired by home palette: subtle green→orange wash */
+  background: linear-gradient(180deg, rgba(45, 90, 45, 0.08) 0%, rgba(255, 140, 0, 0.08) 100%);
   padding: 100px 0;
 }
 
@@ -468,19 +590,21 @@ code {
   background: white;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #eee;
   transition: all 0.3s ease;
   text-align: left;
 }
 
 .news-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.10);
+  border-color: #e6e6e6;
 }
 
 .news-image {
-  height: 200px;
-  background-color: #f0f0f0;
+  height: 260px; /* slightly reduced like Downloads blocks */
+  background-color: #f6f6f6;
   position: relative;
 }
 
@@ -492,20 +616,20 @@ code {
 }
 
 .news-content {
-  padding: 1.5rem;
+  padding: 2rem; /* match Downloads spacing */
 }
 
 .news-date {
   color: #ff8c00;
-  font-size: 0.9rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
 }
 
 .news-content h3 {
   color: #2d5a2d;
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
   font-weight: bold;
 }
 
@@ -521,6 +645,12 @@ code {
   font-weight: bold;
   font-size: 0.9rem;
   transition: color 0.3s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
+  margin: 0;
 }
 
 .read-more:hover {
@@ -572,6 +702,12 @@ code {
   border-radius: 8px;
   transition: all 0.3s ease;
   border: 1px solid transparent;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  width: 100%;
+  text-align: left;
 }
 
 .download-link:hover {
@@ -602,7 +738,7 @@ code {
 .footer-section h3,
 .footer-section h4 {
   margin-bottom: 1rem;
-  color: #ff8c00;
+  color: #ffffff;
 }
 
 .footer-section p {
@@ -611,7 +747,7 @@ code {
 }
 
 .footer-section a {
-  color: white;
+  color: #ffffff;
   text-decoration: none;
   display: block;
   margin-bottom: 0.5rem;
@@ -619,7 +755,7 @@ code {
 }
 
 .footer-section a:hover {
-  color: #ff8c00;
+  color: #a8d5a8;
 }
 
 .footer-bottom {
@@ -692,4 +828,182 @@ code {
   .download-category {
     padding: 1.5rem;
   }
+} 
+
+/* Carousel (News & Events) */
+.carousel {
+  position: relative;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.carousel-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 600ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  padding: 10px; /* slightly larger gutter for breathing room */
+  /* I want to remove the gray visuals around the news cards */
+  border: none;
+  box-shadow: none;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  color: #2d5a2d;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 3;
+}
+
+.carousel-arrow:hover {
+  background: #ffffff;
+  transform: translateY(-50%) scale(1.06);
+  color: #1e3d1e;
+}
+
+.carousel-arrow.left { left: -58px; }
+.carousel-arrow.right { right: -58px; }
+
+@media (min-width: 1024px) {
+  .carousel-arrow.left { left: -58px; }
+  .carousel-arrow.right { right: -58px; }
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(45, 90, 45, 0.25);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.25s ease;
+}
+
+.carousel-dot:hover { background: rgba(45, 90, 45, 0.45); }
+
+.carousel-dot.active {
+  background: #2d5a2d;
+  width: 22px; /* pill for active dot */
+}
+
+/* Enhance news-card within carousel for a premium feel */
+.news-card {
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.news-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.15), rgba(0,0,0,0));
+  pointer-events: none;
+}
+
+/* Responsive adjustments for carousel */
+@media (max-width: 768px) {
+  .carousel-arrow { display: none; }
+  .carousel-dot { width: 7px; height: 7px; }
+  .carousel-dot.active { width: 18px; }
+} 
+
+/* Add these styles at the end of your existing CSS */
+
+/* Loading styles */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-container p {
+  font-size: 18px;
+  color: #666;
+  margin: 0;
+}
+
+/* Error styles */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.error-container h2 {
+  color: #e74c3c;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.error-container p {
+  color: #666;
+  margin-bottom: 15px;
+  font-size: 16px;
+  max-width: 500px;
+  line-height: 1.5;
+}
+
+.error-container button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.error-container button:hover {
+  background-color: #2980b9;
 } 

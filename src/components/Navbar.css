@@ -13,6 +13,26 @@
   background-color: #ff8c00;
   padding: 8px 0;
   border-bottom: 1px solid #e67e00;
+  transition: transform 0.1s ease, opacity 0.1s ease;
+  transform: translateY(0);
+  opacity: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+}
+
+.top-bar-hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.top-bar-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .top-bar-container {
@@ -115,7 +135,20 @@
 /* Main Green Navigation Bar */
 .main-nav {
   background-color: #2d5a2d;
-  padding: 8px 0;
+  padding: 10px 0 8px 0;
+  position: fixed;
+  top: 44px; /* Position directly below the orange top bar (40px height + 4px gap) */
+  left: 0;
+  right: 0;
+  z-index: 1002; /* Higher than orange bar to ensure visibility */
+  transition: top 0.3s ease, padding 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.main-nav.expanded {
+  top: 0; /* Move to the very top when orange bar is hidden */
+  padding: 12px 0; /* Slightly increase padding to fill more space */
+  z-index: 1003; /* Highest z-index when expanded */
 }
 
 .nav-container {
@@ -241,6 +274,7 @@
   padding: 10px 15px;
   border-radius: 5px;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .nav-icon {
@@ -256,18 +290,50 @@
   transform: translateY(-1px);
 }
 
-.home-btn {
+/* Active navigation styling - white background for current page */
+.nav-link.active-nav {
   background-color: #fff;
   color: #2d5a2d;
   font-weight: bold;
 }
 
-.home-btn .nav-icon svg {
+.nav-link.active-nav .nav-icon svg {
   color: #2d5a2d;
 }
 
-.home-btn:hover {
+.nav-link.active-nav:hover {
   background-color: #f0f0f0;
+  color: #2d5a2d;
+}
+
+/* CSS-based active state for different pages */
+.nav-link[href="/"]:active,
+.nav-link[href="/"]:focus {
+  background-color: #fff;
+  color: #2d5a2d;
+}
+
+.nav-link[href="/academics"]:active,
+.nav-link[href="/academics"]:focus {
+  background-color: #fff;
+  color: #2d5a2d;
+}
+
+.nav-link[href="/admissions"]:active,
+.nav-link[href="/admissions"]:focus {
+  background-color: #fff;
+  color: #2d5a2d;
+}
+
+.nav-link[href="/news"]:active,
+.nav-link[href="/news"]:focus {
+  background-color: #fff;
+  color: #2d5a2d;
+}
+
+.nav-link[href="/downloads"]:active,
+.nav-link[href="/downloads"]:focus {
+  background-color: #fff;
   color: #2d5a2d;
 }
 
@@ -279,6 +345,7 @@
   border: none;
   cursor: pointer;
   padding: 5px;
+  z-index: 1004; /* Ensure button is always clickable */
 }
 
 .mobile-menu-btn span {
@@ -361,7 +428,8 @@
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1005;
   }
 
   .nav-links.mobile-open {
@@ -389,10 +457,18 @@
     height: 50px;
   }
 
-  /* Mobile responsive for top bar */
+  /* Mobile responsive for top bar - compact layout */
+  .top-bar {
+    height: auto;
+    min-height: 56px;
+    padding: 8px 0;
+  }
+
   .top-bar-container {
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
+    padding: 8px 15px;
+    height: auto;
   }
 
   .top-bar-left,
@@ -419,16 +495,17 @@
   .top-bar-links {
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
   }
 
   .top-link {
     font-size: 12px;
+    padding: 3px 6px;
   }
 
   .date-text {
     font-size: 12px;
-    margin-right: 10px;
+    margin-right: 8px;
   }
 
   .login-text {
@@ -438,7 +515,7 @@
   .nav-search {
     width: 100%;
     justify-content: center;
-    margin-top: 8px;
+    margin-top: 6px;
   }
 
   .search-popover {
@@ -450,6 +527,17 @@
   .search-input {
     width: 90vw;
     max-width: 320px;
+  }
+
+  /* Adjust green navbar position for mobile */
+  .main-nav {
+    top: auto; /* Remove fixed top positioning */
+    position: fixed;
+    top: 90px; /* Adjust based on mobile orange bar height */
+  }
+
+  .main-nav.expanded {
+    top: 0;
   }
 }
 
@@ -477,6 +565,28 @@
   }
 
   .top-bar-container {
-    padding: 0 15px;
+    padding: 6px 15px;
+    gap: 4px;
+  }
+
+  .top-bar {
+    min-height: 52px;
+  }
+
+  .main-nav {
+    top: 78px; /* Adjust for smaller mobile orange bar */
+  }
+
+  .top-link {
+    font-size: 11px;
+    padding: 2px 4px;
+  }
+
+  .date-text {
+    font-size: 11px;
+  }
+
+  .login-text {
+    font-size: 11px;
   }
 } 

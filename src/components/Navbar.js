@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ isTopBarVisible }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // You can change this to true to test logged in state
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [activePage, setActivePage] = useState('');
+  const [activeSection, setActiveSection] = useState('home');
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -11,27 +13,6 @@ const Navbar = () => {
 
   const toggleLoginStatus = () => {
     setIsLoggedIn(!isLoggedIn);
-  };
-
-  // Smooth scroll function
-  const handleNavClick = (e, targetId) => {
-    e.preventDefault();
-    
-    // Close mobile menu if open
-    if (isMobileMenuOpen) {
-      setIsMobileMenuOpen(false);
-    }
-    
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      const navbarHeight = document.querySelector('.navbar').offsetHeight;
-      const targetPosition = targetElement.offsetTop - navbarHeight;
-      
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      });
-    }
   };
 
   // Get current date
@@ -46,23 +27,83 @@ const Navbar = () => {
     return today.toLocaleDateString('en-US', options);
   };
 
+  // Determine which navigation item should be active based on current page or section (for home page)
+  const getActiveNavClass = (href) => {
+    if (activePage === '/') {
+      const routeToSection = {
+        '/': 'home',
+        '/academics': 'academics',
+        '/admissions': 'admissions',
+        '/news': 'news',
+        '/downloads': 'downloads',
+      };
+      const targetSection = routeToSection[href] || '';
+      return activeSection === targetSection ? 'nav-link active-nav' : 'nav-link';
+    }
+    return activePage === href ? 'nav-link active-nav' : 'nav-link';
+  };
+
+  // Set active page based on current URL and attach scroll listener for home page section tracking
+  useEffect(() => {
+    const handleRoute = () => {
+      const currentPath = window.location.pathname;
+      setActivePage(currentPath || '/');
+    };
+
+    handleRoute();
+
+    const onPop = () => handleRoute();
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
+
+  // Home page: track which section is in view to move the white highlight as user scrolls
+  useEffect(() => {
+    if (activePage !== '/') return;
+
+    const sectionIds = ['home', 'academics', 'admissions', 'news', 'downloads'];
+
+    const computeActiveSection = () => {
+      const navbar = document.querySelector('.navbar');
+      const navbarHeight = navbar ? navbar.offsetHeight : 0;
+      const scrollY = window.scrollY + navbarHeight + 100; // 100px threshold for earlier switch
+
+      let current = 'home';
+      for (let i = 0; i < sectionIds.length; i++) {
+        const el = document.getElementById(sectionIds[i]);
+        if (!el) continue;
+        const top = el.offsetTop;
+        if (scrollY >= top) current = sectionIds[i];
+      }
+      setActiveSection(current);
+    };
+
+    computeActiveSection();
+    window.addEventListener('scroll', computeActiveSection, { passive: true });
+    window.addEventListener('resize', computeActiveSection);
+    return () => {
+      window.removeEventListener('scroll', computeActiveSection);
+      window.removeEventListener('resize', computeActiveSection);
+    };
+  }, [activePage]);
+
   return (
     <nav className="navbar">
       {/* Top Orange Bar */}
-      <div className="top-bar">
+      <div className={`top-bar ${isTopBarVisible ? 'top-bar-visible' : 'top-bar-hidden'}`}>
         <div className="top-bar-container">
           {/* Left spacer (keeps center links centered) */}
           <div className="top-bar-left"></div>
           
           <div className="top-bar-center">
             <div className="top-bar-links">
-              <a href="#students" className="top-link" onClick={(e) => handleNavClick(e, 'students')}>STUDENTS</a>
+              <a href="#students" className="top-link">STUDENTS</a>
               <span className="separator">|</span>
-              <a href="#faculty" className="top-link" onClick={(e) => handleNavClick(e, 'faculty')}>FACULTY & STAFF</a>
+              <a href="#faculty" className="top-link">FACULTY & STAFF</a>
               <span className="separator">|</span>
-              <a href="#about" className="top-link" onClick={(e) => handleNavClick(e, 'about')}>ABOUT US</a>
+              <a href="#about" className="top-link">ABOUT US</a>
               <span className="separator">|</span>
-              <a href="#contact" className="top-link" onClick={(e) => handleNavClick(e, 'contact')}>CONTACT US</a>
+              <a href="#contact" className="top-link">CONTACT US</a>
             </div>
           </div>
 
@@ -83,7 +124,7 @@ const Navbar = () => {
       </div>
 
       {/* Main Green Navigation Bar */}
-      <div className="main-nav">
+      <div className={`main-nav ${!isTopBarVisible ? 'expanded' : ''}`}>
         <div className="nav-container">
           {/* Logo and Brand */}
           <div className="brand">
@@ -105,31 +146,46 @@ const Navbar = () => {
 
           {/* Navigation Links */}
           <div className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
-            <a href="#home" className="nav-link home-btn" onClick={(e) => handleNavClick(e, 'home')}>
+            <a 
+              href="/" 
+              className={getActiveNavClass('/')}
+            >
               <span className="nav-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3l9-8z"/></svg>
               </span>
               <span className="nav-label">HOME PAGE</span>
             </a>
-            <a href="#academics" className="nav-link" onClick={(e) => handleNavClick(e, 'academics')}>
+            <a 
+              href="/academics" 
+              className={getActiveNavClass('/academics')}
+            >
               <span className="nav-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 13L3.74 11 12 6.82 20.26 11 12 16z"/></svg>
               </span>
               <span className="nav-label">ACADEMIC PROGRAMS</span>
             </a>
-            <a href="#admissions" className="nav-link" onClick={(e) => handleNavClick(e, 'admissions')}>
+            <a 
+              href="/admissions" 
+              className={getActiveNavClass('/admissions')}
+            >
               <span className="nav-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2a5 5 0 015 5v2h1a2 2 0 012 2v9a2 2 0 01-2 2H6a2 2 0 01-2-2v-9a2 2 0 012-2h1V7a5 5 0 015-5zm3 7V7a3 3 0 10-6 0v2h6z"/></svg>
               </span>
               <span className="nav-label">ADMISSIONS</span>
             </a>
-            <a href="#news" className="nav-link" onClick={(e) => handleNavClick(e, 'news')}>
+            <a 
+              href="/news" 
+              className={getActiveNavClass('/news')}
+            >
               <span className="nav-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M4 5h14a2 2 0 012 2v11a3 3 0 01-3 3H6a3 3 0 01-3-3V7a2 2 0 012-2zm2 4h10V7H6v2zm0 3h10v-2H6v2zm0 3h7v-2H6v2z"/></svg>
               </span>
               <span className="nav-label">NEWS & EVENTS</span>
             </a>
-            <a href="#downloads" className="nav-link" onClick={(e) => handleNavClick(e, 'downloads')}>
+            <a 
+              href="/downloads" 
+              className={getActiveNavClass('/downloads')}
+            >
               <span className="nav-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/></svg>
               </span>
