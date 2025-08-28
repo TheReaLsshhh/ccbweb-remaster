@@ -4,7 +4,8 @@ import HomePage from './HomePage';
 import AcademicPrograms from './academicprogram';
 import Students from './students';
 import FacultyStaff from './faculty_staff';
-import AboutUs from './components/aboutus';
+import AboutUs from './aboutus';
+import ContactUs from './contactus';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/students" element={<Students />} />
         <Route path="/faculty" element={<FacultyStaff />} />
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/contact" element={<ContactUs />} />
         <Route path="/admissions" element={<HomePage />} />
         <Route path="/news" element={<HomePage />} />
         <Route path="/downloads" element={<HomePage />} />

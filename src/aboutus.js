@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from './Navbar';
+import Navbar from './components/Navbar';
+import ScrollToTop from './components/ScrollToTop';
 import './aboutus.css';
 
 const AboutUs = () => {
@@ -494,6 +495,9 @@ const AboutUs = () => {
           </div>
         </div>
       </footer>
+      
+      {/* Scroll to Top Button */}
+      <ScrollToTop />
     </div>
   );
 };

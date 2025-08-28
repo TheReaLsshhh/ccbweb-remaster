@@ -2,7 +2,7 @@
 
 /* Hero Section */
 .about-hero {
-  background-image: url('../../public/images/ccb.jpg');
+  background-image: url('../public/images/ccb.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -48,6 +48,7 @@
   line-height: 1.6;
   margin-bottom: 0.5rem;
   font-weight: 600;
+  color: white;
 }
 
 .about-hero .hero-motto {
@@ -57,6 +58,7 @@
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
+  color: white;
 }
 
 /* Navigation Tabs */

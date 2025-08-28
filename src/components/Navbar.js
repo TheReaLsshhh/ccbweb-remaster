@@ -103,7 +103,7 @@ const Navbar = ({ isTopBarVisible }) => {
               <span className="separator">|</span>
                 <a href="/about" className="top-link">ABOUT US</a>
               <span className="separator">|</span>
-              <a href="#contact" className="top-link">CONTACT US</a>
+              <a href="/contact" className="top-link">CONTACT US</a>
             </div>
           </div>
 
