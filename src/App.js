@@ -6,6 +6,7 @@ import Students from './students';
 import FacultyStaff from './faculty_staff';
 import AboutUs from './aboutus';
 import ContactUs from './contactus';
+import Admissions from './admissions';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
         <Route path="/faculty" element={<FacultyStaff />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<ContactUs />} />
-        <Route path="/admissions" element={<HomePage />} />
+        <Route path="/admissions" element={<Admissions />} />
         <Route path="/news" element={<HomePage />} />
         <Route path="/downloads" element={<HomePage />} />
       </Routes>
