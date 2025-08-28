@@ -97,11 +97,11 @@ const Navbar = ({ isTopBarVisible }) => {
           
           <div className="top-bar-center">
             <div className="top-bar-links">
-              <a href="#students" className="top-link">STUDENTS</a>
+              <a href="/students" className="top-link">STUDENTS</a>
               <span className="separator">|</span>
-              <a href="#faculty" className="top-link">FACULTY & STAFF</a>
+              <a href="/faculty" className="top-link">FACULTY & STAFF</a>
               <span className="separator">|</span>
-              <a href="#about" className="top-link">ABOUT US</a>
+                <a href="/about" className="top-link">ABOUT US</a>
               <span className="separator">|</span>
               <a href="#contact" className="top-link">CONTACT US</a>
             </div>

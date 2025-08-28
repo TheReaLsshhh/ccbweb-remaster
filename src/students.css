@@ -1,0 +1,484 @@
+/* Students Page Specific Styles */
+
+/* Students Page Header */
+.students-header {
+    background-image: url('../public/images/ccb.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    padding: 120px 0 80px;
+    text-align: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 445px !important;
+}
+
+.students-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(19, 34, 19, 0.6);
+  z-index: 1;
+}
+
+.students-header .container {
+  position: relative;
+  z-index: 2;
+}
+
+.students-header .page-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.students-header .page-subtitle {
+  font-size: 1.25rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Students Sections */
+.students-section {
+  padding: 80px 0;
+}
+
+.students-section .section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #2d5a2d;
+}
+
+.students-section .section-subtitle {
+  font-size: 1.1rem;
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 3rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Handbook Section */
+.handbook-section {
+  background-color: #f8fafc;
+}
+
+.handbook-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.handbook-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.handbook-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.handbook-icon {
+  color: #000000;
+  margin-bottom: 1.5rem;
+}
+
+.handbook-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #2d5a2d;
+}
+
+.handbook-card p {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.download-btn {
+  background: linear-gradient(135deg, #2d5a2d 0%, #1e3d1e 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(45, 90, 45, 0.4);
+}
+
+/* Calendar Section */
+.calendar-section {
+  background-color: white;
+}
+
+.calendar-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.calendar-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+}
+
+.calendar-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-icon {
+  color: #000000;
+  margin-bottom: 1.5rem;
+}
+
+.calendar-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #065f46;
+}
+
+.calendar-card p {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/* Services Section */
+.services-section {
+  background-color: #f8fafc;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.service-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e5e7eb;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.service-icon {
+  color: #000000;
+  margin-bottom: 1.5rem;
+}
+
+.service-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #2d5a2d;
+}
+
+.service-card p {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.service-card ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.service-card li {
+  padding: 0.5rem 0;
+  color: #4b5563;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.service-card li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #059669;
+  font-weight: bold;
+}
+
+.service-btn {
+  background: linear-gradient(135deg, #2d5a2d 0%, #1e3d1e 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.service-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(45, 90, 45, 0.4);
+}
+
+/* Campus Life Section */
+.campus-life-section {
+  background-color: white;
+}
+
+.campus-life-content {
+  margin-top: 2rem;
+}
+
+.organizations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.org-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+}
+
+.org-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.org-icon {
+  color: #000000;
+  margin-bottom: 1.5rem;
+}
+
+.org-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #92400e;
+}
+
+.org-card p {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.org-btn {
+  background: linear-gradient(135deg, #2d5a2d 0%, #1e3d1e 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.org-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(45, 90, 45, 0.4);
+}
+
+/* Campus Activities */
+.campus-activities {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.campus-activities:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.campus-activities h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #065f46;
+  text-align: center;
+}
+
+.activities-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.activity-item:hover {
+  transform: translateY(-2px);
+  background-color: #f1f5f9;
+}
+
+.activity-icon {
+  color: #000000;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.activity-content h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #065f46;
+}
+
+.activity-content p {
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .students-header .page-title {
+    font-size: 2.5rem;
+  }
+  
+  .students-header .page-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .students-section .section-title {
+    font-size: 2rem;
+  }
+  
+  .handbook-content,
+  .calendar-content,
+  .services-grid,
+  .organizations-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .activities-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .students-section {
+    padding: 60px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .students-header {
+    padding: 100px 0 60px;
+  }
+  
+  .students-header .page-title {
+    font-size: 2rem;
+  }
+  
+  .handbook-card,
+  .calendar-card,
+  .service-card,
+  .org-card {
+    padding: 1.5rem;
+  }
+  
+  .activity-item {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Container styles to match existing design */
+.students-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Footer styles to match existing design */
+.students-section .footer {
+  background-color: #2d5a2d;
+  color: white;
+  padding: 3rem 0 1rem;
+}
+
+.students-section .footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.students-section .footer-section h3,
+.students-section .footer-section h4 {
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.students-section .footer-section a {
+  color: #cbd5e1;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.students-section .footer-section a:hover {
+  color: white;
+}
+
+.students-section .footer-bottom {
+  border-top: 1px solid #374151;
+  padding-top: 1rem;
+  text-align: center;
+  color: #9ca3af;
+}

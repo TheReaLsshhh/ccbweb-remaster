@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
+import ScrollToTop from './components/ScrollToTop';
 import './academicprogram.css';
 
 const AcademicPrograms = () => {
@@ -399,6 +400,9 @@ const AcademicPrograms = () => {
           </div>
         </div>
       </footer>
+      
+      {/* Scroll to Top Button */}
+      <ScrollToTop />
     </div>
   );
 };

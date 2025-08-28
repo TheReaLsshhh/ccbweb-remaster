@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
+import ScrollToTop from './components/ScrollToTop';
 
 // Add: Simple, dependency-free carousel tailored for the News & Events section
 const NewsCarousel = () => {
@@ -496,6 +497,9 @@ const HomePage = () => {
           </div>
         </div>
       </footer>
+      
+      {/* Scroll to Top Button */}
+      <ScrollToTop />
     </div>
   );
 };
