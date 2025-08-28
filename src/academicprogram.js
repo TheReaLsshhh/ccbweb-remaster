@@ -8,6 +8,7 @@ const AcademicPrograms = () => {
   const [isTopBarVisible, setIsTopBarVisible] = useState(true);
   const [isProgramNavVisible, setIsProgramNavVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -242,7 +243,7 @@ const AcademicPrograms = () => {
               <button
                 key={key}
                 className={`program-tab ${activeTab === key ? 'active' : ''}`}
-                onClick={() => setActiveTab(key)}
+                onClick={() => { setActiveTab(key); setIsDetailsOpen(true); }}
               >
                 <div className="tab-icon">{program.icon}</div>
                 <div className="tab-content">
@@ -269,29 +270,42 @@ const AcademicPrograms = () => {
         </button>
       )}
 
-      {/* Program Details */}
-      <section className="program-details">
-        <div className="container">
-          <div className="program-header">
-            <div className="program-info">
-              <div className="program-icon">{currentProgram.icon}</div>
-              <div className="program-meta">
-                <h2>{currentProgram.name}</h2>
-                <p className="program-description">{currentProgram.description}</p>
-                <div className="program-stats">
-                  <div className="stat">
-                    <span className="stat-label">Duration:</span>
-                    <span className="stat-value">{currentProgram.duration}</span>
-                  </div>
-                  <div className="stat">
-                    <span className="stat-label">Units:</span>
-                    <span className="stat-value">{currentProgram.units}</span>
+      {/* Program Details Modal (only header) */}
+      {isDetailsOpen && (
+        <div className="program-modal-overlay" onClick={() => setIsDetailsOpen(false)}>
+          <div className="program-modal" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setIsDetailsOpen(false)} aria-label="Close details">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+              </svg>
+            </button>
+
+            <div className="program-header">
+              <div className="program-info">
+                <div className="program-icon">{currentProgram.icon}</div>
+                <div className="program-meta">
+                  <h2>{currentProgram.name}</h2>
+                  <p className="program-description">{currentProgram.description}</p>
+                  <div className="program-stats">
+                    <div className="stat">
+                      <span className="stat-label">Duration:</span>
+                      <span className="stat-value">{currentProgram.duration}</span>
+                    </div>
+                    <div className="stat">
+                      <span className="stat-label">Units:</span>
+                      <span className="stat-value">{currentProgram.units}</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      )}
 
+      {/* In-page Content Sections (remain visible) */}
+      <section className="program-details">
+        <div className="container">
           <div className="program-content">
             {/* Specializations */}
             <div className="content-section">
