@@ -43,6 +43,11 @@ const Navbar = ({ isTopBarVisible }) => {
     return activePage === href ? 'nav-link active-nav' : 'nav-link';
   };
 
+  // Determine which top bar link should be active based on current page
+  const getActiveTopLinkClass = (href) => {
+    return activePage === href ? 'top-link active-top-link' : 'top-link';
+  };
+
   // Set active page based on current URL and attach scroll listener for home page section tracking
   useEffect(() => {
     const handleRoute = () => {
@@ -97,13 +102,13 @@ const Navbar = ({ isTopBarVisible }) => {
           
           <div className="top-bar-center">
             <div className="top-bar-links">
-              <a href="/students" className="top-link">STUDENTS</a>
+              <a href="/students" className={getActiveTopLinkClass('/students')}>STUDENTS</a>
               <span className="separator">|</span>
-              <a href="/faculty" className="top-link">FACULTY & STAFF</a>
+              <a href="/faculty" className={getActiveTopLinkClass('/faculty')}>FACULTY & STAFF</a>
               <span className="separator">|</span>
-                <a href="/about" className="top-link">ABOUT US</a>
+              <a href="/about" className={getActiveTopLinkClass('/about')}>ABOUT US</a>
               <span className="separator">|</span>
-              <a href="/contact" className="top-link">CONTACT US</a>
+              <a href="/contact" className={getActiveTopLinkClass('/contact')}>CONTACT US</a>
             </div>
           </div>
 

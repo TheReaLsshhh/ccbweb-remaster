@@ -50,7 +50,7 @@
 }
 
 .date-text {
-  color: #666;
+  color: black;
   font-size: 14px;
   font-weight: 500;
   margin-right: 16px;
@@ -79,6 +79,15 @@
 
 .top-link:hover {
   color: #fff;
+}
+
+/* Active top bar link styling */
+.top-link.active-top-link {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 700;
 }
 
 .separator {
@@ -127,7 +136,7 @@
 }
 
 .login-text {
-  color: #666;
+  color: black;
   font-size: 14px;
   font-weight: 500;
 }
