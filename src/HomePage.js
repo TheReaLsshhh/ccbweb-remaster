@@ -300,42 +300,100 @@ const HomePage = () => {
           <div className="admissions-content">
             <div className="admissions-info">
               <h3>Admission Requirements</h3>
-              <ul>
-                <li>Completed Application Form</li>
-                <li>High School Diploma or Equivalent</li>
-                <li>Official Transcript of Records</li>
-                <li>Certificate of Good Moral Character</li>
-                <li>Medical Certificate</li>
-                <li>2x2 ID Pictures (4 copies)</li>
-                <li>Birth Certificate (NSO/PSA)</li>
-              </ul>
+              <div className="requirements-grid">
+                <div className="requirement-category">
+                  <div className="category-icon">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/>
+                      <path d="M14 2v6h6"/>
+                      <path d="M16 13H8"/>
+                      <path d="M16 17H8"/>
+                      <path d="M10 9H8"/>
+                    </svg>
+                  </div>
+                  <h4>Application Documents</h4>
+                  <ul>
+                    <li>Completed Application Form (2 copies)</li>
+                    <li>High School Diploma or Equivalent</li>
+                    <li>Official Transcript of Records</li>
+                    <li>Certificate of Good Moral Character</li>
+                  </ul>
+                </div>
+                
+                <div className="requirement-category">
+                  <div className="category-icon">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                  </div>
+                  <h4>Medical & Identification</h4>
+                  <ul>
+                    <li>Medical Certificate (Physical Examination)</li>
+                    <li>2x2 ID Pictures (4 copies)</li>
+                    <li>Birth Certificate (NSO/PSA)</li>
+                    <li>Valid Government ID</li>
+                  </ul>
+                </div>
+                
+                <div className="requirement-category">
+                  <div className="category-icon">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                  </div>
+                  <h4>Additional Requirements</h4>
+                  <ul>
+                    <li>Certificate of Residency</li>
+                    <li>Parent/Guardian Consent Form</li>
+                    <li>Application Fee Receipt</li>
+                    <li>Interview Schedule Confirmation</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="requirements-note">
+                <div className="note-icon">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                    <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <div className="note-content">
+                  <h5>Important Notes:</h5>
+                  <ul>
+                    <li>All documents must be original or certified true copies</li>
+                    <li>Foreign documents must be authenticated by the Philippine Embassy</li>
+                    <li>Application deadline: March 31, 2026 for Academic Year 2026-2027</li>
+                    <li>Incomplete applications will not be processed</li>
+                  </ul>
+                </div>
+              </div>
             </div>
             
             <div className="admissions-process">
               <h3>Application Process</h3>
               <div className="process-steps">
-                <div className="step">
+                <div className="step-item">
                   <div className="step-number">1</div>
                   <div className="step-content">
                     <h4>Submit Application</h4>
                     <p>Complete and submit your application form with all required documents</p>
                   </div>
                 </div>
-                <div className="step">
+                <div className="step-item">
                   <div className="step-number">2</div>
                   <div className="step-content">
                     <h4>Entrance Examination</h4>
                     <p>Take the college entrance examination on the scheduled date</p>
                   </div>
                 </div>
-                <div className="step">
+                <div className="step-item">
                   <div className="step-number">3</div>
                   <div className="step-content">
                     <h4>Interview</h4>
                     <p>Attend the scheduled interview with the admissions committee</p>
                   </div>
                 </div>
-                <div className="step">
+                <div className="step-item">
                   <div className="step-number">4</div>
                   <div className="step-content">
                     <h4>Enrollment</h4>
