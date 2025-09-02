@@ -1324,3 +1324,148 @@ code {
 .error-container button:hover {
   background-color: #2980b9;
 } 
+
+/* Partners Section */
+.partners-section {
+  background-color: #f8f9fa;
+  padding: 80px 0;
+}
+
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+  margin-top: 50px;
+}
+
+.partner-category {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.partner-category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.partner-category h3 {
+  color: #2d5a2d;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  text-align: center;
+  border-bottom: 3px solid #2d5a2d;
+  padding-bottom: 10px;
+}
+
+.partner-logos {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.partner-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.partner-logo:hover {
+  background-color: #e9ecef;
+  transform: translateX(5px);
+}
+
+.logo-placeholder {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #2d5a2d, #4a7c59);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(45, 90, 45, 0.2);
+}
+
+.partner-logo span {
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
+}
+
+/* Responsive Design for Partners */
+@media (max-width: 768px) {
+  .partners-section {
+    padding: 60px 0;
+  }
+  
+  .partners-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-top: 40px;
+  }
+  
+  .partner-category {
+    padding: 25px 20px;
+  }
+  
+  .partner-category h3 {
+    font-size: 20px;
+  }
+  
+  .partner-logo {
+    padding: 12px;
+    gap: 12px;
+  }
+  
+  .logo-placeholder {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .partner-logo span {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .partners-section {
+    padding: 50px 0;
+  }
+  
+  .partners-grid {
+    gap: 25px;
+    margin-top: 30px;
+  }
+  
+  .partner-category {
+    padding: 20px 15px;
+  }
+  
+  .partner-category h3 {
+    font-size: 18px;
+  }
+  
+  .partner-logo {
+    padding: 10px;
+    gap: 10px;
+  }
+  
+  .logo-placeholder {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .partner-logo span {
+    font-size: 13px;
+  }
+} 

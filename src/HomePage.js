@@ -527,6 +527,106 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* Partners Section */}
+      <section id="partners" className="section partners-section">
+        <div className="container">
+          <h2 className="section-title">Our Partners</h2>
+          <p className="section-subtitle">Building strong partnerships for educational excellence</p>
+          
+          <div className="partners-grid">
+            <div className="partner-category">
+              <h3>Industry Partners</h3>
+              <div className="partner-logos">
+                <div className="partner-logo">
+                  <div className="logo-placeholder">
+                    <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                  </div>
+                  <span>Tech Solutions Inc.</span>
+                </div>
+                <div className="partner-logo">
+                  <div className="logo-placeholder">
+                    <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                  </div>
+                  <span>Business Partners Ltd.</span>
+                </div>
+                <div className="partner-logo">
+                  <div className="logo-placeholder">
+                    <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                  </div>
+                  <span>Innovation Hub</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="partner-category">
+              <h3>Educational Partners</h3>
+              <div className="partner-logos">
+                <div className="partner-logo">
+                  <div className="logo-placeholder">
+                    <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+                      <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 13L3.74 11 12 6.82 20.26 11 12 16z"/>
+                    </svg>
+                  </div>
+                  <span>University of the Philippines</span>
+                </div>
+                <div className="partner-logo">
+                  <div className="logo-placeholder">
+                    <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+                      <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 13L3.74 11 12 6.82 20.26 11 12 16z"/>
+                    </svg>
+                  </div>
+                  <span>Ateneo de Manila University</span>
+                </div>
+                <div className="partner-logo">
+                  <div className="logo-placeholder">
+                    <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+                      <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 13L3.74 11 12 6.82 20.26 11 12 16z"/>
+                    </svg>
+                  </div>
+                  <span>De La Salle University</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="partner-category">
+              <h3>Government Partners</h3>
+              <div className="partner-logos">
+                <div className="partner-logo">
+                  <div className="logo-placeholder">
+                    <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+                      <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c-1.1-.9-2-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                    </svg>
+                  </div>
+                  <span>Department of Education</span>
+                </div>
+                <div className="partner-logo">
+                  <div className="logo-placeholder">
+                    <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+                      <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c-1.1-.9-2-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                    </svg>
+                  </div>
+                  <span>Commission on Higher Education</span>
+                </div>
+                <div className="partner-logo">
+                  <div className="logo-placeholder">
+                    <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+                      <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c-1.1-.9-2-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                    </svg>
+                  </div>
+                  <span>City Government of Bayawan</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="footer">
         <div className="container">

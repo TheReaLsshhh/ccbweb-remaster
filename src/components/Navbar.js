@@ -71,6 +71,12 @@ const Navbar = ({ isTopBarVisible }) => {
   useEffect(() => {
     if (activePage !== '/') return;
 
+    // Keep the active section fixed to 'home' when on home page
+    // Remove scroll-based tracking to prevent active state changes during scrolling
+    setActiveSection('home');
+    
+    // Commented out scroll tracking code:
+    /*
     const sectionIds = ['home', 'academics', 'admissions', 'news', 'downloads'];
 
     const computeActiveSection = () => {
@@ -95,6 +101,7 @@ const Navbar = ({ isTopBarVisible }) => {
       window.removeEventListener('scroll', computeActiveSection);
       window.removeEventListener('resize', computeActiveSection);
     };
+    */
   }, [activePage]);
 
   // Close mobile menus when clicking outside
