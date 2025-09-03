@@ -398,6 +398,11 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .news-hero {
+    padding: 100px 0 60px;
+    height: 445px !important;
+  }
+
   .news-hero .hero-title {
     font-size: 2.5rem;
   }
@@ -436,7 +441,7 @@
 @media (max-width: 480px) {
   .news-hero {
     padding: 100px 0 60px;
-    height: 350px !important;
+    height: 445px !important;
   }
   
   .news-hero .hero-title {
