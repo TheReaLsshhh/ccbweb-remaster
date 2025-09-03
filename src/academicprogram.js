@@ -36,12 +36,12 @@ const AcademicPrograms = () => {
       <Navbar isTopBarVisible={isTopBarVisible} />
       
       {/* Academic Programs Hero Section */}
-      <section className={`academics-hero ${!isTopBarVisible ? 'navbar-collapsed' : ''}`}>
+      <section className={`admissions-hero ${!isTopBarVisible ? 'navbar-collapsed' : ''}`}>
         <div className="container">
           <div className="hero-content">
             <h1 className="hero-title">Academic Programs</h1>
-            <p className="hero-subtitle">Discover our comprehensive range of degree programs</p>
-            <p className="hero-motto">Quality education designed to prepare you for success in your chosen career</p>
+            <p className="hero-subtitle">Begin your journey to academic excellence at City College of Bayawan</p>
+            <p className="hero-motto">Your future starts here with quality education and endless opportunities</p>
           </div>
         </div>
       </section>
