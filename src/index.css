@@ -179,6 +179,7 @@ code {
 
 /* Home Section */
 .home-section {
+  margin-top: 110px;
   max-height: 100%;
   min-height: 100vh;
   display: flex;
@@ -192,6 +193,27 @@ code {
   background-repeat: no-repeat;
 }
 
+/* Mobile responsive adjustments for home section */
+@media (max-width: 768px) {
+  .home-section {
+    padding-top: 104px; /* Account for mobile orange bar (56px) + green navbar (48px) */
+    background-size: contain;
+    background-position: center;
+    min-height: 10vh;
+    margin-top: 80px; /* Reduce top margin for mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .home-section {
+    padding-top: 100px; /* Account for smaller mobile orange bar (52px) + green navbar (48px) */
+    background-size: contain;
+    background-position: center;
+    min-height: 10vh;
+    margin-top: 60px; /* Further reduce top margin for small mobile */
+  }
+}
+
 /* Adjust padding when top bar is hidden */
 .home-section.navbar-collapsed {
   padding-top: 60px; /* Reduced padding when only green navbar is visible (expanded green navbar height) */
@@ -201,6 +223,10 @@ code {
 @media (max-width: 768px) {
   .home-section {
     padding-top: 104px; /* Account for mobile orange bar (56px) + green navbar (48px) */
+    background-size: contain;
+    background-position: center;
+    min-height: 80vh;
+    margin-top: 80px; /* Reduce top margin for mobile */
   }
   
   .home-section.navbar-collapsed {
@@ -211,6 +237,10 @@ code {
 @media (max-width: 480px) {
   .home-section {
     padding-top: 100px; /* Account for smaller mobile orange bar (52px) + green navbar (48px) */
+    background-size: contain;
+    background-position: center;
+    min-height: 70vh;
+    margin-top: 60px; /* Further reduce top margin for small mobile */
   }
   
   .home-section.navbar-collapsed {
@@ -277,6 +307,115 @@ code {
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 34rem;
+}
+
+/* Mobile responsive hero section */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .hero-motto {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero-description {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero-buttons {
+    margin-top: 2rem;
+    gap: 0.8rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    min-width: 10px;
+  }
+  
+  .home-section {
+    min-height: 80vh;
+    padding: 60px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .hero-motto {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-description {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-buttons {
+    margin-top: 1.5rem;
+    gap: 0.6rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+    max-width: 140px;
+    font-size: 0.9rem;
+    padding: 10px 20px;
+    margin: 0 auto;
+  }
+
+  .btn-primary {
+    width: 100%;
+    max-width: 140px;
+    font-size: 0.9rem;
+    padding: 10px 20px;
+    margin: 0 auto;
+  }
+  
+  .btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    min-width: 100px;
+    width: 100%;
+    max-width: 100px;
+  }
+  
+  .home-section {
+    min-height: 37vh;
+    padding: 50px 15px;
+    margin-bottom: -50px;
+  }
+
+  .home-section .container {
+    margin-bottom: 100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
 }
 
 @keyframes fadeInUp {
@@ -451,9 +590,22 @@ code {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
-.program-icon {
+.program-card .program-icon {
   color: #2d5a2d;
   margin-bottom: 1rem;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center;
+  width: 100% !important;
+  background: none !important;
+  border-radius: 0 !important;
+  height: auto !important;
+}
+
+.program-card .program-icon svg {
+  width: 64px !important;
+  height: 64px !important;
 }
 
 .program-card h3 {
@@ -510,6 +662,148 @@ code {
   font-weight: bold;
 }
 
+/* Enhanced Admission Requirements */
+.requirements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.requirement-category {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border-left: 4px solid #2d5a2d;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.requirement-category::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #2d5a2d, #4a7c59);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.requirement-category:hover::before {
+  transform: scaleX(1);
+}
+
+.requirement-category:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(45, 90, 45, 0.15);
+}
+
+.category-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #2d5a2d, #4a7c59);
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  color: white;
+}
+
+.requirement-category h4 {
+  color: #2d5a2d;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.requirement-category ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.requirement-category li {
+  color: #666;
+  padding: 0.5rem 0;
+  position: relative;
+  padding-left: 1.5rem;
+  border-bottom: 1px solid #e9ecef;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.requirement-category li:last-child {
+  border-bottom: none;
+}
+
+.requirement-category li::before {
+  content: '✓';
+  color: #2d5a2d;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  font-size: 1.1rem;
+}
+
+/* Requirements Note Section */
+.requirements-note {
+  background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+  border: 1px solid #ffeaa7;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.note-icon {
+  color: #856404;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.note-content h5 {
+  color: #856404;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  margin-top: 0;
+  text-align: left;
+}
+
+.note-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.note-content li {
+  color: #856404;
+  padding: 0.25rem 0;
+  position: relative;
+  padding-left: 1.25rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.note-content li::before {
+  content: 'ℹ';
+  color: #856404;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  font-size: 0.9rem;
+}
+
+/* Original admissions-info styles for backward compatibility */
 .admissions-info ul {
   list-style: none;
   padding: 0;
@@ -701,20 +995,23 @@ code {
   padding: 0.8rem;
   border-radius: 8px;
   transition: all 0.3s ease;
-  border: 1px solid transparent;
-  background: none;
+  border: 1px solid #e0e0e0;
+  background: white;
   cursor: pointer;
   font-family: inherit;
   font-size: inherit;
   width: 100%;
   text-align: left;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .download-link:hover {
   background-color: #f8f9fa;
   color: #2d5a2d;
   border-color: #2d5a2d;
+  border-width: 2px;
   transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(45, 90, 45, 0.15);
 }
 
 .download-link svg {
@@ -796,8 +1093,28 @@ code {
   
   .programs-grid,
   .news-grid,
-  .downloads-grid {
+  .downloads-grid,
+  .requirements-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .requirements-grid {
+    gap: 1.5rem;
+  }
+  
+  .requirement-category {
+    padding: 1.25rem;
+  }
+  
+  .requirements-note {
+    flex-direction: row;
+    text-align: left;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .note-icon {
+    margin-top: 0;
   }
   
   .footer-content {
@@ -1006,4 +1323,149 @@ code {
 
 .error-container button:hover {
   background-color: #2980b9;
+} 
+
+/* Partners Section */
+.partners-section {
+  background-color: #f8f9fa;
+  padding: 80px 0;
+}
+
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+  margin-top: 50px;
+}
+
+.partner-category {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.partner-category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.partner-category h3 {
+  color: #2d5a2d;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  text-align: center;
+  border-bottom: 3px solid #2d5a2d;
+  padding-bottom: 10px;
+}
+
+.partner-logos {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.partner-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.partner-logo:hover {
+  background-color: #e9ecef;
+  transform: translateX(5px);
+}
+
+.logo-placeholder {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #2d5a2d, #4a7c59);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(45, 90, 45, 0.2);
+}
+
+.partner-logo span {
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
+}
+
+/* Responsive Design for Partners */
+@media (max-width: 768px) {
+  .partners-section {
+    padding: 60px 0;
+  }
+  
+  .partners-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-top: 40px;
+  }
+  
+  .partner-category {
+    padding: 25px 20px;
+  }
+  
+  .partner-category h3 {
+    font-size: 20px;
+  }
+  
+  .partner-logo {
+    padding: 12px;
+    gap: 12px;
+  }
+  
+  .logo-placeholder {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .partner-logo span {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .partners-section {
+    padding: 50px 0;
+  }
+  
+  .partners-grid {
+    gap: 25px;
+    margin-top: 30px;
+  }
+  
+  .partner-category {
+    padding: 20px 15px;
+  }
+  
+  .partner-category h3 {
+    font-size: 18px;
+  }
+  
+  .partner-logo {
+    padding: 10px;
+    gap: 10px;
+  }
+  
+  .logo-placeholder {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .partner-logo span {
+    font-size: 13px;
+  }
 } 

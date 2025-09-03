@@ -3,12 +3,17 @@ import './Navbar.css';
 
 const Navbar = ({ isTopBarVisible }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isTopBarMobileMenuOpen, setIsTopBarMobileMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activePage, setActivePage] = useState('');
   const [activeSection, setActiveSection] = useState('home');
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const toggleTopBarMobileMenu = () => {
+    setIsTopBarMobileMenuOpen(!isTopBarMobileMenuOpen);
   };
 
   const toggleLoginStatus = () => {
@@ -66,6 +71,12 @@ const Navbar = ({ isTopBarVisible }) => {
   useEffect(() => {
     if (activePage !== '/') return;
 
+    // Keep the active section fixed to 'home' when on home page
+    // Remove scroll-based tracking to prevent active state changes during scrolling
+    setActiveSection('home');
+    
+    // Commented out scroll tracking code:
+    /*
     const sectionIds = ['home', 'academics', 'admissions', 'news', 'downloads'];
 
     const computeActiveSection = () => {
@@ -90,7 +101,41 @@ const Navbar = ({ isTopBarVisible }) => {
       window.removeEventListener('scroll', computeActiveSection);
       window.removeEventListener('resize', computeActiveSection);
     };
+    */
   }, [activePage]);
+
+  // Close mobile menus when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const topBarMobileMenu = document.querySelector('.top-bar-mobile-menu');
+      const topBarMobileMenuBtn = document.querySelector('.top-bar-mobile-menu-btn');
+      const mainMobileMenu = document.querySelector('.nav-links');
+      const mainMobileMenuBtn = document.querySelector('.mobile-menu-btn');
+
+      // Close top bar mobile menu if clicking outside
+      if (isTopBarMobileMenuOpen && 
+          topBarMobileMenu && 
+          !topBarMobileMenu.contains(event.target) && 
+          topBarMobileMenuBtn && 
+          !topBarMobileMenuBtn.contains(event.target)) {
+        setIsTopBarMobileMenuOpen(false);
+      }
+
+      // Close main mobile menu if clicking outside
+      if (isMobileMenuOpen && 
+          mainMobileMenu && 
+          !mainMobileMenu.contains(event.target) && 
+          mainMobileMenuBtn && 
+          !mainMobileMenuBtn.contains(event.target)) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isTopBarMobileMenuOpen, isMobileMenuOpen]);
 
   return (
     <nav className="navbar">
@@ -124,6 +169,23 @@ const Navbar = ({ isTopBarVisible }) => {
                 {isLoggedIn ? 'LOG OUT' : 'LOG IN'}
               </span>
             </div>
+          </div>
+
+          {/* Mobile Menu Button for Top Bar */}
+          <button className="top-bar-mobile-menu-btn" onClick={toggleTopBarMobileMenu} aria-label="Toggle top navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+
+        {/* Mobile Menu Overlay for Top Bar */}
+        <div className={`top-bar-mobile-menu ${isTopBarMobileMenuOpen ? 'mobile-open' : ''}`}>
+          <div className="top-bar-mobile-links">
+            <a href="/students" className={getActiveTopLinkClass('/students')} onClick={() => setIsTopBarMobileMenuOpen(false)}>STUDENTS</a>
+            <a href="/faculty" className={getActiveTopLinkClass('/faculty')} onClick={() => setIsTopBarMobileMenuOpen(false)}>FACULTY & STAFF</a>
+            <a href="/about" className={getActiveTopLinkClass('/about')} onClick={() => setIsTopBarMobileMenuOpen(false)}>ABOUT US</a>
+            <a href="/contact" className={getActiveTopLinkClass('/contact')} onClick={() => setIsTopBarMobileMenuOpen(false)}>CONTACT US</a>
           </div>
         </div>
       </div>

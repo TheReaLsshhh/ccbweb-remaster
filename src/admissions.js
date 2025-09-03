@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import ScrollToTop from './components/ScrollToTop';
+<<<<<<< HEAD
+=======
+import Footer from './components/footer';
+>>>>>>> 717272eec94838c01214a9536ce3b2a069ab4fe6
 import './admissions.css';
 
 const Admissions = () => {
@@ -341,6 +345,7 @@ const Admissions = () => {
         </div>
       </section>
 
+<<<<<<< HEAD
       {/* Footer */}
       <footer className="footer">
         <div className="container">
@@ -369,6 +374,9 @@ const Admissions = () => {
           </div>
         </div>
       </footer>
+=======
+      <Footer />
+>>>>>>> 717272eec94838c01214a9536ce3b2a069ab4fe6
       
       {/* Scroll to Top Button */}
       <ScrollToTop />
@@ -377,3 +385,7 @@ const Admissions = () => {
 };
 
 export default Admissions;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 717272eec94838c01214a9536ce3b2a069ab4fe6

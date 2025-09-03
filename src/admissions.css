@@ -114,7 +114,13 @@
 
 .requirement-item {
   display: flex;
+<<<<<<< HEAD
   align-items: flex-start;
+=======
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+>>>>>>> 717272eec94838c01214a9536ce3b2a069ab4fe6
   gap: 20px;
   background: #fff;
   padding: 30px;
@@ -439,7 +445,11 @@
 @media (max-width: 768px) {
   .admissions-hero {
     padding: 100px 0 60px;
+<<<<<<< HEAD
     height: 350px !important;
+=======
+    height: 445px !important;
+>>>>>>> 717272eec94838c01214a9536ce3b2a069ab4fe6
   }
 
   .admissions-hero .hero-title {
@@ -514,8 +524,13 @@
 
 @media (max-width: 480px) {
   .admissions-hero {
+<<<<<<< HEAD
     padding: 80px 0 50px;
     height: 300px !important;
+=======
+    padding: 100px 0 60px;
+    height: 445px !important;
+>>>>>>> 717272eec94838c01214a9536ce3b2a069ab4fe6
   }
 
   .admissions-hero .hero-title {
@@ -602,3 +617,7 @@
 }
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 717272eec94838c01214a9536ce3b2a069ab4fe6
