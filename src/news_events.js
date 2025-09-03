@@ -63,7 +63,7 @@ const NewsEvents = () => {
                     <h4>Enrollment for Second Semester AY 2024-2025</h4>
                     <p className="announcement-date">December 15, 2024</p>
                     <p>Early enrollment for the second semester is now open. Secure your slot and avoid the rush. Visit the Registrar's Office for more details.</p>
-                    <a href="#" className="read-more">Read More</a>
+                    <button className="read-more" onClick={() => alert('Full article coming soon')}>Read More</button>
                   </div>
                 </div>
 
@@ -77,7 +77,7 @@ const NewsEvents = () => {
                     <h4>Holiday Schedule for Christmas Break</h4>
                     <p className="announcement-date">December 20, 2024</p>
                     <p>Classes will be suspended from December 23, 2024 to January 5, 2025. Regular classes resume on January 6, 2025.</p>
-                    <a href="#" className="read-more">Read More</a>
+                    <button className="read-more" onClick={() => alert('Full article coming soon')}>Read More</button>
                   </div>
                 </div>
 
@@ -91,7 +91,7 @@ const NewsEvents = () => {
                     <h4>Library Hours Update</h4>
                     <p className="announcement-date">December 18, 2024</p>
                     <p>Extended library hours during finals week: 7:00 AM to 9:00 PM. Study rooms are available for group study sessions.</p>
-                    <a href="#" className="read-more">Read More</a>
+                    <button className="read-more" onClick={() => alert('Full article coming soon')}>Read More</button>
                   </div>
                 </div>
               </div>
@@ -112,7 +112,7 @@ const NewsEvents = () => {
                     <h4>Christmas Celebration and Gift Giving</h4>
                     <p className="event-time">9:00 AM - 4:00 PM</p>
                     <p>Join us for our annual Christmas celebration featuring performances, games, and gift-giving to our community partners.</p>
-                    <a href="#" className="event-link">Learn More</a>
+                    <button className="event-link" onClick={() => alert('Event details coming soon')}>Learn More</button>
                   </div>
                 </div>
 
@@ -127,7 +127,7 @@ const NewsEvents = () => {
                     <h4>Academic Excellence Awards</h4>
                     <p className="event-time">2:00 PM - 5:00 PM</p>
                     <p>Recognition ceremony for students who achieved academic excellence in the first semester AY 2024-2025.</p>
-                    <a href="#" className="event-link">Learn More</a>
+                    <button className="event-link" onClick={() => alert('Event details coming soon')}>Learn More</button>
                   </div>
                 </div>
 
@@ -142,7 +142,7 @@ const NewsEvents = () => {
                     <h4>Career Fair 2025</h4>
                     <p className="event-time">9:00 AM - 6:00 PM</p>
                     <p>Connect with potential employers and explore career opportunities. Open to all graduating students and alumni.</p>
-                    <a href="#" className="event-link">Learn More</a>
+                    <button className="event-link" onClick={() => alert('Event details coming soon')}>Learn More</button>
                   </div>
                 </div>
 
@@ -157,7 +157,7 @@ const NewsEvents = () => {
                     <h4>Sports Festival</h4>
                     <p className="event-time">8:00 AM - 6:00 PM</p>
                     <p>Annual sports competition featuring basketball, volleyball, badminton, and track and field events.</p>
-                    <a href="#" className="event-link">Learn More</a>
+                    <button className="event-link" onClick={() => alert('Event details coming soon')}>Learn More</button>
                   </div>
                 </div>
               </div>
@@ -177,7 +177,7 @@ const NewsEvents = () => {
                     <h4>CCB Students Win Regional IT Competition</h4>
                     <p className="achievement-date">December 10, 2024</p>
                     <p>Our BS Information Technology students secured first place in the Regional IT Innovation Challenge, showcasing their programming and problem-solving skills.</p>
-                    <a href="#" className="read-more">Read Full Story</a>
+                    <button className="read-more" onClick={() => alert('Full story coming soon')}>Read Full Story</button>
                   </div>
                 </div>
 
@@ -191,7 +191,7 @@ const NewsEvents = () => {
                     <h4>Faculty Research Grant Awarded</h4>
                     <p className="achievement-date">December 5, 2024</p>
                     <p>Dr. Maria Santos received a research grant for her study on "Sustainable Agriculture Practices in Negros Oriental."</p>
-                    <a href="#" className="read-more">Read Full Story</a>
+                    <button className="read-more" onClick={() => alert('Full story coming soon')}>Read Full Story</button>
                   </div>
                 </div>
 
@@ -205,7 +205,7 @@ const NewsEvents = () => {
                     <h4>CCB Ranked Top 3 in Regional Rankings</h4>
                     <p className="achievement-date">November 30, 2024</p>
                     <p>City College of Bayawan secured the third position in the Regional Higher Education Institution Rankings for 2024.</p>
-                    <a href="#" className="read-more">Read Full Story</a>
+                    <button className="read-more" onClick={() => alert('Full story coming soon')}>Read Full Story</button>
                   </div>
                 </div>
 
@@ -219,7 +219,7 @@ const NewsEvents = () => {
                     <h4>Student Organization Recognition</h4>
                     <p className="achievement-date">November 25, 2024</p>
                     <p>The CCB Student Council received the "Outstanding Student Organization" award from the Department of Education.</p>
-                    <a href="#" className="read-more">Read Full Story</a>
+                    <button className="read-more" onClick={() => alert('Full story coming soon')}>Read Full Story</button>
                   </div>
                 </div>
               </div>

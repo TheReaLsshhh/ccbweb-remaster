@@ -347,30 +347,30 @@ const FacultyStaff = () => {
                 <div className="admin-card">
                   <h4>Administrative Systems</h4>
                   <div className="admin-links">
-                    <a href="#" className="admin-link">Student Information System</a>
-                    <a href="#" className="admin-link">Financial Management System</a>
-                    <a href="#" className="admin-link">Inventory Management</a>
-                    <a href="#" className="admin-link">Facility Booking System</a>
+                    <button className="admin-link" onClick={() => alert('Student Information System - Coming Soon')}>Student Information System</button>
+                    <button className="admin-link" onClick={() => alert('Financial Management System - Coming Soon')}>Financial Management System</button>
+                    <button className="admin-link" onClick={() => alert('Inventory Management - Coming Soon')}>Inventory Management</button>
+                    <button className="admin-link" onClick={() => alert('Facility Booking System - Coming Soon')}>Facility Booking System</button>
                   </div>
                 </div>
                 
                 <div className="admin-card">
                   <h4>Communication Tools</h4>
                   <div className="admin-links">
-                    <a href="#" className="admin-link">Email System</a>
-                    <a href="#" className="admin-link">Video Conferencing</a>
-                    <a href="#" className="admin-link">Internal Messaging</a>
-                    <a href="#" className="admin-link">Announcement Portal</a>
+                    <button className="admin-link" onClick={() => alert('Email System - Coming Soon')}>Email System</button>
+                    <button className="admin-link" onClick={() => alert('Video Conferencing - Coming Soon')}>Video Conferencing</button>
+                    <button className="admin-link" onClick={() => alert('Internal Messaging - Coming Soon')}>Internal Messaging</button>
+                    <button className="admin-link" onClick={() => alert('Announcement Portal - Coming Soon')}>Announcement Portal</button>
                   </div>
                 </div>
                 
                 <div className="admin-card">
                   <h4>Support Services</h4>
                   <div className="admin-links">
-                    <a href="#" className="admin-link">IT Support</a>
-                    <a href="#" className="admin-link">Facilities Maintenance</a>
-                    <a href="#" className="admin-link">Security Services</a>
-                    <a href="#" className="admin-link">Emergency Procedures</a>
+                    <button className="admin-link" onClick={() => alert('IT Support - Coming Soon')}>IT Support</button>
+                    <button className="admin-link" onClick={() => alert('Facilities Maintenance - Coming Soon')}>Facilities Maintenance</button>
+                    <button className="admin-link" onClick={() => alert('Security Services - Coming Soon')}>Security Services</button>
+                    <button className="admin-link" onClick={() => alert('Emergency Procedures - Coming Soon')}>Emergency Procedures</button>
                   </div>
                 </div>
               </div>
