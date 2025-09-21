@@ -157,7 +157,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #2d5a2d, #ff8c00);
+  background: #ff8c00;
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
@@ -169,7 +169,7 @@
 .download-category:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-  border-color: #e0e0e0;
+  border-color: #2d5a2d;
 }
 
 /* Category Icons */
@@ -188,7 +188,7 @@
 
 .download-category:hover .category-icon {
   transform: scale(1.1);
-  background: linear-gradient(135deg, #1e3d1e, #2d5a2d);
+  background: linear-gradient(135deg, #ff8c00, #ff9f1a);
 }
 
 .download-category h3 {
@@ -196,6 +196,11 @@
   font-size: 1.4rem;
   margin-bottom: 1.5rem;
   font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.download-category:hover h3 {
+  color: #ff8c00;
 }
 
 /* Download Links */
@@ -243,11 +248,13 @@
 }
 
 .download-link:hover {
-  background: linear-gradient(135deg, #f0f8f0, #fff);
-  color: #2d5a2d;
+  background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+  color: #ff8c00;
   border-color: #2d5a2d;
+  border-width: 2px;
   transform: translateX(8px);
   box-shadow: 0 6px 20px rgba(45, 90, 45, 0.15);
+  font-weight: 600;
 }
 
 .download-link:active {
@@ -261,17 +268,8 @@
 }
 
 .download-link:hover svg {
-  color: #1e3d1e;
+  color: #ff8c00;
   transform: scale(1.1);
-}
-
-/* Enhanced hover effects for download links */
-.download-link:hover {
-  background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
-  border-color: #2d5a2d;
-  border-width: 2px;
-  color: #1e3d1e;
-  font-weight: 600;
 }
 
 /* Responsive Design */

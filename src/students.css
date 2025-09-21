@@ -89,6 +89,24 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.handbook-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #ff8c00;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.handbook-card:hover::before {
+  transform: scaleX(1);
 }
 
 .handbook-card:hover {
@@ -97,8 +115,14 @@
 }
 
 .handbook-icon {
-  color: #000000;
+  color: #2d5a2d;
   margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.handbook-card:hover .handbook-icon {
+  color: #ff8c00;
+  transform: scale(1.1);
 }
 
 .handbook-card h3 {
@@ -106,6 +130,11 @@
   font-weight: 600;
   margin-bottom: 1rem;
   color: #2d5a2d;
+  transition: color 0.3s ease;
+}
+
+.handbook-card:hover h3 {
+  color: #ff8c00;
 }
 
 .handbook-card p {
@@ -128,6 +157,7 @@
 .download-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(45, 90, 45, 0.4);
+  background: linear-gradient(135deg, #ff8c00, #ff9f1a);
 }
 
 /* Calendar Section */
@@ -150,6 +180,24 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
   border: 1px solid #e2e8f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.calendar-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #ff8c00;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.calendar-card:hover::before {
+  transform: scaleX(1);
 }
 
 .calendar-card:hover {
@@ -158,15 +206,26 @@
 }
 
 .calendar-icon {
-  color: #000000;
+  color: #2d5a2d;
   margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.calendar-card:hover .calendar-icon {
+  color: #ff8c00;
+  transform: scale(1.1);
 }
 
 .calendar-card h3 {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #065f46;
+  color: #2d5a2d;
+  transition: color 0.3s ease;
+}
+
+.calendar-card:hover h3 {
+  color: #ff8c00;
 }
 
 .calendar-card p {
@@ -194,6 +253,24 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 1px solid #e5e7eb;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #ff8c00;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover::before {
+  transform: scaleX(1);
 }
 
 .service-card:hover {
@@ -202,8 +279,14 @@
 }
 
 .service-icon {
-  color: #000000;
+  color: #2d5a2d;
   margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+  color: #ff8c00;
+  transform: scale(1.1);
 }
 
 .service-card h3 {
@@ -211,6 +294,11 @@
   font-weight: 600;
   margin-bottom: 1rem;
   color: #2d5a2d;
+  transition: color 0.3s ease;
+}
+
+.service-card:hover h3 {
+  color: #ff8c00;
 }
 
 .service-card p {
@@ -254,6 +342,7 @@
 .service-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(45, 90, 45, 0.4);
+  background: linear-gradient(135deg, #ff8c00, #ff9f1a);
 }
 
 /* Campus Life Section */
@@ -280,6 +369,24 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
   border: 1px solid #e5e7eb;
+  position: relative;
+  overflow: hidden;
+}
+
+.org-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #ff8c00;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.org-card:hover::before {
+  transform: scaleX(1);
 }
 
 .org-card:hover {
@@ -288,15 +395,26 @@
 }
 
 .org-icon {
-  color: #000000;
+  color: #2d5a2d;
   margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.org-card:hover .org-icon {
+  color: #ff8c00;
+  transform: scale(1.1);
 }
 
 .org-card h3 {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #92400e;
+  color: #2d5a2d;
+  transition: color 0.3s ease;
+}
+
+.org-card:hover h3 {
+  color: #ff8c00;
 }
 
 .org-card p {
@@ -319,6 +437,7 @@
 .org-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(45, 90, 45, 0.4);
+  background: linear-gradient(135deg, #ff8c00, #ff9f1a);
 }
 
 /* Campus Activities */
@@ -340,7 +459,7 @@
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
-  color: #065f46;
+  color: #2d5a2d;
   text-align: center;
 }
 
@@ -352,7 +471,7 @@
 
 .activity-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 1rem;
   padding: 1rem;
   background: #f8fafc;
@@ -367,16 +486,26 @@
 }
 
 .activity-icon {
-  color: #000000;
+  color: #2d5a2d;
   flex-shrink: 0;
-  margin-top: 0.25rem;
+  transition: all 0.3s ease;
+}
+
+.activity-item:hover .activity-icon {
+  color: #ff8c00;
+  transform: scale(1.1);
 }
 
 .activity-content h4 {
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: #065f46;
+  color: #2d5a2d;
+  transition: color 0.3s ease;
+}
+
+.activity-item:hover .activity-content h4 {
+  color: #ff8c00;
 }
 
 .activity-content p {

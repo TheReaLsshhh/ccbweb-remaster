@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 
-const Navbar = ({ isTopBarVisible }) => {
+const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isTopBarMobileMenuOpen, setIsTopBarMobileMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activePage, setActivePage] = useState('');
-  const [activeSection, setActiveSection] = useState('home');
+  const [isTopBarVisible, setIsTopBarVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -16,9 +16,6 @@ const Navbar = ({ isTopBarVisible }) => {
     setIsTopBarMobileMenuOpen(!isTopBarMobileMenuOpen);
   };
 
-  const toggleLoginStatus = () => {
-    setIsLoggedIn(!isLoggedIn);
-  };
 
   // Get current date
   const getCurrentDate = () => {
@@ -34,17 +31,6 @@ const Navbar = ({ isTopBarVisible }) => {
 
   // Determine which navigation item should be active based on current page or section (for home page)
   const getActiveNavClass = (href) => {
-    if (activePage === '/') {
-      const routeToSection = {
-        '/': 'home',
-        '/academics': 'academics',
-        '/admissions': 'admissions',
-        '/news': 'news',
-        '/downloads': 'downloads',
-      };
-      const targetSection = routeToSection[href] || '';
-      return activeSection === targetSection ? 'nav-link active-nav' : 'nav-link';
-    }
     return activePage === href ? 'nav-link active-nav' : 'nav-link';
   };
 
@@ -67,42 +53,52 @@ const Navbar = ({ isTopBarVisible }) => {
     return () => window.removeEventListener('popstate', onPop);
   }, []);
 
-  // Home page: track which section is in view to move the white highlight as user scrolls
+  // Handle scroll-based top bar visibility
   useEffect(() => {
-    if (activePage !== '/') return;
-
-    // Keep the active section fixed to 'home' when on home page
-    // Remove scroll-based tracking to prevent active state changes during scrolling
-    setActiveSection('home');
-    
-    // Commented out scroll tracking code:
-    /*
-    const sectionIds = ['home', 'academics', 'admissions', 'news', 'downloads'];
-
-    const computeActiveSection = () => {
-      const navbar = document.querySelector('.navbar');
-      const navbarHeight = navbar ? navbar.offsetHeight : 0;
-      const scrollY = window.scrollY + navbarHeight + 100; // 100px threshold for earlier switch
-
-      let current = 'home';
-      for (let i = 0; i < sectionIds.length; i++) {
-        const el = document.getElementById(sectionIds[i]);
-        if (!el) continue;
-        const top = el.offsetTop;
-        if (scrollY >= top) current = sectionIds[i];
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const isMobileOrTablet = window.innerWidth <= 768;
+      
+      if (isMobileOrTablet) {
+        // Mobile/Tablet behavior: show orange bar at top OR after hero section
+        const heroSection = document.querySelector('.hero-section');
+        const heroSectionBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight : 0;
+        
+        if (currentScrollY <= 10) {
+          // Show when at the very top
+          setIsTopBarVisible(true);
+        } else if (currentScrollY >= heroSectionBottom) {
+          // Show again after hero section
+          setIsTopBarVisible(true);
+        } else {
+          // Hide when in hero section
+          setIsTopBarVisible(false);
+        }
+      } else {
+        // Desktop behavior: only show at the very top
+        if (currentScrollY <= 10) {
+          setIsTopBarVisible(true);
+        } else {
+          setIsTopBarVisible(false);
+        }
       }
-      setActiveSection(current);
+      
+      setLastScrollY(currentScrollY);
     };
 
-    computeActiveSection();
-    window.addEventListener('scroll', computeActiveSection, { passive: true });
-    window.addEventListener('resize', computeActiveSection);
-    return () => {
-      window.removeEventListener('scroll', computeActiveSection);
-      window.removeEventListener('resize', computeActiveSection);
+    // Handle window resize to recalculate behavior
+    const handleResize = () => {
+      handleScroll(); // Re-evaluate scroll position on resize
     };
-    */
-  }, [activePage]);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [lastScrollY]);
 
   // Close mobile menus when clicking outside
   useEffect(() => {
@@ -139,7 +135,7 @@ const Navbar = ({ isTopBarVisible }) => {
 
   return (
     <nav className="navbar">
-      {/* Top Orange Bar */}
+      {/* Top Orange Bar - Sticky but scroll-based visibility */}
       <div className={`top-bar ${isTopBarVisible ? 'top-bar-visible' : 'top-bar-hidden'}`}>
         <div className="top-bar-container">
           {/* Left spacer (keeps center links centered) */}
@@ -159,16 +155,6 @@ const Navbar = ({ isTopBarVisible }) => {
 
           <div className="top-bar-right">
             <span className="date-text">Today is {getCurrentDate()}</span>
-            <div className="login-section" onClick={toggleLoginStatus}>
-              <div className="user-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                </svg>
-              </div>
-              <span className="login-text">
-                {isLoggedIn ? 'LOG OUT' : 'LOG IN'}
-              </span>
-            </div>
           </div>
 
           {/* Mobile Menu Button for Top Bar */}
@@ -282,4 +268,4 @@ const Navbar = ({ isTopBarVisible }) => {
   );
 };
 
-export default Navbar; 
+export default Navbar;

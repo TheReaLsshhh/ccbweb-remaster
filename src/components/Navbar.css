@@ -13,14 +13,13 @@
   background-color: #ff8c00;
   padding: 8px 0;
   border-bottom: 1px solid #e67e00;
-  transition: transform 0.1s ease, opacity 0.1s ease;
-  transform: translateY(0);
-  opacity: 1;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1002; /* Higher than main navbar but lower than mobile menu */
+  z-index: 1001; /* Higher than main navbar but lower than mobile menu */
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .top-bar-hidden {
@@ -53,7 +52,7 @@
   color: black;
   font-size: 14px;
   font-weight: 500;
-  margin-right: 16px;
+  margin-right: 25px;
 }
 
 /* Top Bar Center - Navigation Links */
@@ -217,18 +216,25 @@
   background-color: #2d5a2d;
   padding: 10px 0 8px 0;
   position: fixed;
-  top: 44px; /* Position directly below the orange top bar (40px height + 4px gap) */
+  top: 40px; /* Position directly below the orange top bar with no gap */
   left: 0;
   right: 0;
   z-index: 1000; /* Lower than top bar mobile menu to ensure it appears behind */
-  transition: top 0.3s ease, padding 0.3s ease;
+  width: 100%;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: top 0.1s ease-in-out, padding 0.1s ease-in-out;
+  border: none;
+  outline: none;
+  will-change: top, padding;
 }
 
 .main-nav.expanded {
   top: 0; /* Move to the very top when orange bar is hidden */
   padding: 12px 0; /* Slightly increase padding to fill more space */
   z-index: 1001; /* Higher than regular main nav but lower than mobile menu */
+  border: none;
+  outline: none;
+  background-color: #2d5a2d; /* Ensure background is solid */
 }
 
 .nav-container {
@@ -573,7 +579,7 @@
 
   .date-text {
     font-size: 12px;
-    margin-right: 0;
+    margin-right: 16px;
     white-space: nowrap;
   }
 

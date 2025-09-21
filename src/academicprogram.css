@@ -109,8 +109,8 @@
 }
 
 .program-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
   border-color: #2d5a2d;
 }
 
@@ -120,6 +120,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.3s ease;
+}
+
+.program-card:hover .program-icon {
+  color: #ff8c00;
+  transform: scale(1.1);
 }
 
 .program-card h3 {
@@ -182,8 +188,9 @@
 }
 
 .description-card:hover {
-  transform: translateX(5px);
+  transform: translateY(-5px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  border-left-color: #ff8c00;
 }
 
 .description-card h3 {
@@ -334,16 +341,18 @@
   height: 3px;
   background: linear-gradient(90deg, #2d5a2d, #4a7c59);
   transform: scaleX(0);
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .requirement-category:hover::before {
   transform: scaleX(1);
+  background: linear-gradient(90deg, #ff8c00, #ff9f1a);
 }
 
 .requirement-category:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(45, 90, 45, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  border-left-color: #ff8c00;
 }
 
 .category-icon {
@@ -352,10 +361,16 @@
   align-items: center;
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #2d5a2d, #4a7c59);
+  background: linear-gradient(135deg, #2d5a2d, #3a6b3a);
   border-radius: 50%;
   margin: 0 auto 1rem;
   color: white;
+  transition: all 0.3s ease;
+}
+
+.requirement-category:hover .category-icon {
+  background: linear-gradient(135deg, #ff8c00, #ff9f1a);
+  transform: scale(1.1);
 }
 
 .requirement-category h4 {
@@ -413,8 +428,8 @@
 
 .specific-req-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-  border-top-color: #2d5a2d;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  border-top-color: #ff8c00;
 }
 
 .specific-req-card h4 {
@@ -563,8 +578,8 @@
 }
 
 .timeline-content:hover {
-  transform: translateX(5px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
   border-color: #2d5a2d;
 }
 
