@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import ScrollToTop from './components/ScrollToTop';
 import Footer from './components/footer';
+import apiService from './services/api';
 import './admissions.css';
 
 const Admissions = () => {
@@ -17,6 +18,9 @@ const Admissions = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
+  const [importantDates, setImportantDates] = useState([]);
+  const [loadingDates, setLoadingDates] = useState(true);
+  const [datesError, setDatesError] = useState('');
 
   // Scroll-based navbar visibility
   useEffect(() => {
@@ -38,6 +42,42 @@ const Admissions = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [lastScrollY]);
+
+  // Load Important Dates dynamically
+  useEffect(() => {
+    const loadImportantDates = async () => {
+      try {
+        setLoadingDates(true);
+        const resp = await apiService.getAdmissionsImportantDates();
+        if (resp.status === 'success' && Array.isArray(resp.important_dates)) {
+          setImportantDates(resp.important_dates);
+        } else {
+          setDatesError('Failed to load important dates');
+        }
+      } catch (e) {
+        setDatesError('Failed to load important dates');
+      } finally {
+        setLoadingDates(false);
+      }
+    };
+    loadImportantDates();
+  }, []);
+
+  const formatDateRange = (startISO, endISO) => {
+    const start = new Date(startISO);
+    const end = new Date(endISO);
+    const monthLong = (d) => d.toLocaleString(undefined, { month: 'long' });
+    const dayNum = (d) => d.toLocaleString(undefined, { day: 'numeric' });
+    const yearNum = (d) => d.getFullYear();
+
+    if (yearNum(start) === yearNum(end)) {
+      if (start.getMonth() === end.getMonth()) {
+        return `${monthLong(start)} ${dayNum(start)} - ${dayNum(end)}, ${yearNum(start)}`;
+      }
+      return `${monthLong(start)} ${dayNum(start)} - ${monthLong(end)} ${dayNum(end)}, ${yearNum(start)}`;
+    }
+    return `${monthLong(start)} ${dayNum(start)}, ${yearNum(start)} - ${monthLong(end)} ${dayNum(end)}, ${yearNum(end)}`;
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -75,7 +115,7 @@ const Admissions = () => {
       <Navbar isTopBarVisible={isTopBarVisible} />
       
       {/* Admissions Hero Section */}
-      <section className={`admissions-hero ${!isTopBarVisible ? 'navbar-collapsed' : ''}`}>
+      <section className={`news-hero ${!isTopBarVisible ? 'navbar-collapsed' : ''}`}>
         <div className="container">
           <div className="hero-content">
             <h1 className="hero-title">Admissions</h1>
@@ -86,59 +126,60 @@ const Admissions = () => {
       </section>
 
       {/* Admissions Section */}
-      <section className="section admissions-section">
+      <section className="section-admissions admissions-section">
         <div className="container">
           
           <div className="admissions-content">
             {/* Requirements Section */}
             <div className="requirements-section">
               <h2>Admission Requirements</h2>
-              <div className="requirements-grid">
-                <div className="requirement-item">
-                  <div className="requirement-icon">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                    </svg>
+              <p className="section-subtitle">Complete requirements and qualifications for enrollment at City College of Bayawan</p>
+              
+              <div className="requirements-content">
+                <div className="general-requirements">
+                  
+                  <div className="enrollment-requirements">
+                    <h4>REQUIREMENTS FOR ENROLLMENT OF NEW STUDENTS</h4>
+                    <ul>
+                      <li>✓ Accident Insurance with One (1) Year Coverage (Original and Photocopy)</li>
+                      <li>✓ Form 138- SHS Report Card (Original copy)</li>
+                      <li>✓ Certificate of GOOD MORAL CHARACTER (Original copy)</li>
+                      <li>✓ PSA Birth Certificate (Photocopy)</li>
+                      <li>✓ CLEAR COPY of 2x2 ID Picture with Name Tag & on a White Background (2pcs)</li>
+                      <li>✓ One (1) Long-size Brown Expanded Envelope</li>
+                    </ul>
                   </div>
-                  <div className="requirement-text">
-                    <h4>High School Diploma</h4>
-                    <p>Original copy of high school diploma or certificate of completion</p>
+
+                  <div className="transferee-requirements">
+                    <h4>REQUIREMENTS FOR ENROLLMENT OF TRANSFEREES</h4>
+                    <ul>
+                      <li>✓ Accident Insurance with One (1) Year Coverage (Original and Photocopy)</li>
+                      <li>✓ Transcript of Records (TOR) (Original copy)</li>
+                      <li>✓ Honorable Dismissal/Certificate of Transfer Credential (Original copy)</li>
+                      <li>✓ Certificate of GOOD MORAL CHARACTER (Original copy)</li>
+                      <li>✓ PSA Birth Certificate (Photocopy)</li>
+                      <li>✓ CLEAR COPY of 2x2 ID Picture with Name Tag & on a White Background (2pcs)</li>
+                      <li>✓ Accreditation of Subjects Form (Original copy)</li>
+                      <li>✓ One (1) Long-size Brown Expanded Envelope</li>
+                    </ul>
                   </div>
                 </div>
 
-                <div className="requirement-item">
-                  <div className="requirement-icon">
+                <div className="requirements-note">
+                  <div className="note-icon">
                     <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                      <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zM16 18H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                      <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                   </div>
-                  <div className="requirement-text">
-                    <h4>Academic Records</h4>
-                    <p>Official transcript of records from previous school</p>
-                  </div>
-                </div>
-
-                <div className="requirement-item">
-                  <div className="requirement-icon">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                    </svg>
-                  </div>
-                  <div className="requirement-text">
-                    <h4>Personal Information</h4>
-                    <p>Birth certificate, valid ID, and recent 2x2 photos</p>
-                  </div>
-                </div>
-
-                <div className="requirement-item">
-                  <div className="requirement-icon">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                  </div>
-                  <div className="requirement-text">
-                    <h4>Medical Certificate</h4>
-                    <p>Health certificate from a licensed physician</p>
+                  <div className="note-content">
+                    <h5>Important Notes:</h5>
+                    <ul>
+                      <li>All documents must be original or certified true copies</li>
+                      <li>Foreign documents must be authenticated by the Philippine Embassy</li>
+                      <li>Application deadline: March 31, 2026 for Academic Year 2026-2027</li>
+                      <li>Incomplete applications will not be processed</li>
+                      <li>Entrance examination fee: ₱500.00 (non-refundable)</li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -147,93 +188,91 @@ const Admissions = () => {
             {/* Application Process Section */}
             <div className="process-section">
               <h2>Application Process</h2>
-              <div className="process-steps">
-                <div className="step-item">
-                  <div className="step-number">1</div>
-                  <div className="step-content">
-                    <h4>Submit Requirements</h4>
-                    <p>Complete the application form and submit all required documents to the Admissions Office</p>
+              <p className="section-subtitle">Follow these steps to apply for your chosen program</p>
+              
+              <div className="process-timeline">
+                <div className="timeline-item">
+                  <div className="timeline-number">1</div>
+                  <div className="timeline-content">
+                    <h4>Choose Your Program</h4>
+                    <p>Review program descriptions and select the degree program that aligns with your career goals and interests.</p>
                   </div>
                 </div>
-
-                <div className="step-item">
-                  <div className="step-number">2</div>
-                  <div className="step-content">
-                    <h4>Document Review</h4>
-                    <p>Our admissions team will review your application and verify all submitted documents</p>
+                
+                <div className="timeline-item">
+                  <div className="timeline-number">2</div>
+                  <div className="timeline-content">
+                    <h4>Prepare Requirements</h4>
+                    <p>Gather all required documents including transcripts, certificates, and identification documents.</p>
                   </div>
                 </div>
-
-                <div className="step-item">
-                  <div className="step-number">3</div>
-                  <div className="step-content">
-                    <h4>Interview</h4>
-                    <p>Schedule and attend a personal interview with our academic advisors</p>
+                
+                <div className="timeline-item">
+                  <div className="timeline-number">3</div>
+                  <div className="timeline-content">
+                    <h4>Submit Application</h4>
+                    <p>Complete the application form and submit it along with all required documents to the Admissions Office.</p>
                   </div>
                 </div>
-
-                <div className="step-item">
-                  <div className="step-number">4</div>
-                  <div className="step-content">
-                    <h4>Acceptance</h4>
-                    <p>Receive your acceptance letter and enrollment instructions</p>
+                
+                <div className="timeline-item">
+                  <div className="timeline-number">4</div>
+                  <div className="timeline-content">
+                    <h4>Take Entrance Exam</h4>
+                    <p>Attend the scheduled entrance examination and program-specific assessments.</p>
                   </div>
                 </div>
+                
+                <div className="timeline-item">
+                  <div className="timeline-number">5</div>
+                  <div className="timeline-content">
+                    <h4>Interview & Evaluation</h4>
+                    <p>Participate in the interview process and await evaluation results from the admissions committee.</p>
+                  </div>
+                </div>
+                
+                <div className="timeline-item">
+                  <div className="timeline-number">6</div>
+                  <div className="timeline-content">
+                    <h4>Enrollment</h4>
+                    <p>Upon acceptance, complete enrollment procedures and begin your academic journey at City College of Bayawan.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="section-cta">
+                <a href="/admissions" className="btn btn-primary">Apply Now</a>
+                <a href="/contact" className="btn btn-secondary">Contact Admissions Office</a>
               </div>
             </div>
 
             {/* Important Dates Section */}
             <div className="dates-section">
               <h2>Important Dates</h2>
-              <div className="dates-grid">
-                <div className="date-item">
-                  <div className="date-icon">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                      <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
-                    </svg>
-                  </div>
-                  <div className="date-text">
-                    <h4>Application Period</h4>
-                    <p>January 15 - March 31, 2025</p>
-                  </div>
+              {loadingDates ? (
+                <div className="loading-container">
+                  <div className="loading-spinner"></div>
+                  <p>Loading dates...</p>
                 </div>
-
-                <div className="date-item">
-                  <div className="date-icon">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                      <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
-                    </svg>
-                  </div>
-                  <div className="date-text">
-                    <h4>Document Submission</h4>
-                    <p>February 1 - April 15, 2025</p>
-                  </div>
+              ) : datesError ? (
+                <div className="error-container"><p className="error-message">{datesError}</p></div>
+              ) : (
+                <div className="dates-grid">
+                  {importantDates.map(item => (
+                    <div key={item.id} className="date-item">
+                      <div className="date-icon">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                          <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                        </svg>
+                      </div>
+                      <div className="date-text">
+                        <h4>{item.title}</h4>
+                        <p>{formatDateRange(item.start_date, item.end_date)}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-
-                <div className="date-item">
-                  <div className="date-icon">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                      <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
-                    </svg>
-                  </div>
-                  <div className="date-text">
-                    <h4>Interviews</h4>
-                    <p>March 1 - April 30, 2025</p>
-                  </div>
-                </div>
-
-                <div className="date-item">
-                  <div className="date-icon">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                      <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
-                    </svg>
-                  </div>
-                  <div className="date-text">
-                    <h4>Enrollment</h4>
-                    <p>May 1 - June 30, 2025</p>
-                  </div>
-                </div>
-              </div>
+              )}
             </div>
 
             {/* Application Form Section */}

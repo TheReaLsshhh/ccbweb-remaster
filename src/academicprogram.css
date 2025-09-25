@@ -1,5 +1,69 @@
 /* Academic Programs Page Styles */
 
+/* Loading and Error States */
+.loading-container, .error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #1a472a;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.loading-container p, .error-message {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  color: #dc3545;
+  font-weight: 500;
+}
+
+.error-container .btn {
+  margin-top: 1rem;
+}
+
+
 /* Academic Programs Hero Section */
 .academics-hero {
   background-image: url('../public/images/ccb.jpg');
@@ -37,12 +101,21 @@
   margin-top: 48px;
 }
 
+.academics-section .section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2d5a2d;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
 .hero-content {
   max-width: 800px;
   margin: 0 auto;
 }
 
-.hero-title {
+.hero-content .hero-title {
   font-size: 3.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -66,11 +139,13 @@
   font-style: italic;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   line-height: 1.6;
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: 0.5s;
 }
 
 /* Academic Sections */
 .academics-section {
-  padding: 80px 0;
+  padding: 20px 0;
   position: relative;
 }
 
@@ -82,9 +157,6 @@
   background: linear-gradient(180deg, rgba(45, 90, 45, 0.05) 0%, rgba(255, 140, 0, 0.05) 100%);
 }
 
-.admission-requirements-section {
-  background-color: rgba(255, 255, 255, 0.98);
-}
 
 .application-process-section {
   background: linear-gradient(180deg, rgba(255, 140, 0, 0.05) 0%, rgba(45, 90, 45, 0.05) 100%);
@@ -106,12 +178,40 @@
   transition: all 0.3s ease;
   text-align: center;
   border: 1px solid rgba(45, 90, 45, 0.1);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
 }
 
 .program-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
   border-color: #2d5a2d;
+}
+
+/* Staggered animation delays for program cards */
+.program-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.program-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.program-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.program-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.program-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.program-card:nth-child(6) {
+  animation-delay: 0.6s;
 }
 
 .program-icon {
@@ -148,7 +248,8 @@
 }
 
 .program-duration,
-.program-units {
+.program-units,
+.program-enhancements {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -156,18 +257,20 @@
   border-bottom: 1px solid #eee;
 }
 
-.program-units {
+.program-enhancements {
   border-bottom: none;
 }
 
 .duration-label,
-.units-label {
+.units-label,
+.enhancements-label {
   color: #2d5a2d;
   font-weight: 600;
 }
 
 .duration-value,
-.units-value {
+.units-value,
+.enhancements-value {
   color: #ff8c00;
   font-weight: bold;
 }
@@ -185,12 +288,40 @@
   margin-bottom: 2.5rem;
   border-left: 5px solid #2d5a2d;
   transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards, bounce 0.3s ease-in-out 0.6s;
 }
 
 .description-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
   border-left-color: #ff8c00;
+}
+
+/* Staggered animation delays for description cards */
+.description-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.description-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.description-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.description-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.description-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.description-card:nth-child(6) {
+  animation-delay: 0.6s;
 }
 
 .description-card h3 {
@@ -242,8 +373,7 @@
   font-size: 1.1rem;
 }
 
-.program-overview p,
-.career-prospects p {
+.program-overview p {
   color: #666;
   line-height: 1.7;
   margin: 0;
@@ -273,6 +403,38 @@
 }
 
 .core-courses li::before {
+  content: '✓';
+  color: #2d5a2d;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  font-size: 1.1rem;
+}
+
+.career-prospects ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.5rem;
+}
+
+.career-prospects li {
+  color: #666;
+  padding: 0.6rem 0;
+  position: relative;
+  padding-left: 1.8rem;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.career-prospects li:last-child {
+  border-bottom: none;
+}
+
+.career-prospects li::before {
   content: '✓';
   color: #2d5a2d;
   font-weight: bold;
@@ -469,58 +631,6 @@
   font-size: 1.2rem;
 }
 
-/* Requirements Note (reusing existing styles from index.css) */
-.requirements-note {
-  background: linear-gradient(135deg, #fff3cd, #ffeaa7);
-  border: 1px solid #ffeaa7;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-top: 2rem;
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-}
-
-.note-icon {
-  color: #856404;
-  flex-shrink: 0;
-  margin-top: 0.25rem;
-}
-
-.note-content h5 {
-  color: #856404;
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-  margin-top: 0;
-  text-align: left;
-}
-
-.note-content ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  text-align: left;
-}
-
-.note-content li {
-  color: #856404;
-  padding: 0.25rem 0;
-  position: relative;
-  padding-left: 1.25rem;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  text-align: left;
-}
-
-.note-content li::before {
-  content: 'ℹ';
-  color: #856404;
-  font-weight: bold;
-  position: absolute;
-  left: 0;
-  font-size: 0.9rem;
-}
 
 /* Application Process Timeline */
 .process-timeline {
@@ -542,7 +652,7 @@
   content: '';
   position: absolute;
   left: 25px;
-  top: 60px;
+  top: 28px;
   width: 2px;
   height: calc(100% + 1rem);
   background: linear-gradient(180deg, #2d5a2d, #ff8c00);
@@ -686,7 +796,7 @@
   }
   
   .academics-section {
-    padding: 60px 0;
+    padding: 10px 0;
   }
   
   .section-title {
@@ -752,7 +862,7 @@
 @media (max-width: 480px) {
   .academics-hero {
     padding: 80px 0 50px;
-    margin-top: 100px;
+    margin-top: -50px;
   }
   
   .academics-hero.navbar-collapsed {
@@ -772,7 +882,7 @@
   }
   
   .academics-section {
-    padding: 50px 0;
+    padding: 10px 0;
   }
   
   .section-title {

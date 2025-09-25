@@ -38,8 +38,11 @@ const Students = () => {
       {/* Students Page Header */}
       <section className="students-header">
         <div className="container">
-          <h1 className="page-title">Student Portal</h1>
-          <p className="page-subtitle">Access essential resources and information for your academic journey</p>
+          <div className="hero-content">
+            <h1 className="hero-title">Student Portal</h1>
+            <p className="hero-subtitle">Access essential resources and information for your academic journey</p>
+            <p className="hero-motto">Empowering Students for Academic Excellence</p>
+          </div>
         </div>
       </section>
 

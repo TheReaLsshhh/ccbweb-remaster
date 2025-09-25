@@ -58,31 +58,15 @@ const Navbar = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const isMobileOrTablet = window.innerWidth <= 768;
-      
+
       if (isMobileOrTablet) {
-        // Mobile/Tablet behavior: show orange bar at top OR after hero section
-        const heroSection = document.querySelector('.hero-section');
-        const heroSectionBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight : 0;
-        
-        if (currentScrollY <= 10) {
-          // Show when at the very top
-          setIsTopBarVisible(true);
-        } else if (currentScrollY >= heroSectionBottom) {
-          // Show again after hero section
-          setIsTopBarVisible(true);
-        } else {
-          // Hide when in hero section
-          setIsTopBarVisible(false);
-        }
+        // Mobile/Tablet behavior: only show near the very top
+        setIsTopBarVisible(currentScrollY <= 10);
       } else {
         // Desktop behavior: only show at the very top
-        if (currentScrollY <= 10) {
-          setIsTopBarVisible(true);
-        } else {
-          setIsTopBarVisible(false);
-        }
+        setIsTopBarVisible(currentScrollY <= 10);
       }
-      
+
       setLastScrollY(currentScrollY);
     };
 

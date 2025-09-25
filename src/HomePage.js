@@ -3,10 +3,12 @@ import './HomePage.css';
 import Navbar from './components/Navbar';
 import Footer from './components/footer';
 import ScrollToTop from './components/ScrollToTop';
+import apiService from './services/api';
 
 const HomePage = () => {
   // State for responsive behavior
   const [isMobile, setIsMobile] = useState(false);
+  const [isMayorOpen, setIsMayorOpen] = useState(false);
 
   // Check if device is mobile/tablet
   useEffect(() => {
@@ -20,52 +22,75 @@ const HomePage = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // News data for carousel
-  const newsData = [
-    {
-      id: 1,
-      date: "December 2024",
-      title: "Enrollment Now Open",
-      description: "Registration for Academic Year 2025-2026 is now open. Apply today!",
-      link: "/admissions"
-    },
-    {
-      id: 2,
-      date: "November 2024",
-      title: "New Programs Available",
-      description: "We're excited to announce new academic programs starting next semester.",
-      link: "/academics"
-    },
-    {
-      id: 3,
-      date: "October 2024",
-      title: "Student Achievements",
-      description: "Congratulations to our students who excelled in recent competitions and examinations.",
-      link: "/news"
-    },
-    {
-      id: 4,
-      date: "September 2024",
-      title: "Campus Renovation Complete",
-      description: "Our newly renovated facilities are now open for students and faculty.",
-      link: "/about"
-    },
-    {
-      id: 5,
-      date: "August 2024",
-      title: "Scholarship Opportunities",
-      description: "New scholarship programs available for deserving students this academic year.",
-      link: "/admissions"
-    }
-  ];
+  // Dynamic Latest News & Updates (Announcements + Events + Achievements)
+  const [newsData, setNewsData] = useState([]);
+  const [newsError, setNewsError] = useState('');
+  const [newsLoading, setNewsLoading] = useState(true);
 
   // Carousel state
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
+  // Load announcements, events, achievements for carousel
+  useEffect(() => {
+    const loadAll = async () => {
+      try {
+        setNewsLoading(true);
+        const [annRes, evtRes, achRes] = await Promise.all([
+          apiService.getAnnouncements(),
+          apiService.getEvents(),
+          apiService.getAchievements()
+        ]);
+
+        const annsAll = (annRes.status === 'success' && Array.isArray(annRes.announcements)) ? annRes.announcements.map((a) => ({
+          id: `a-${a.id}`,
+          type: 'announcement',
+          badge: 'Announcements',
+          date: a.date,
+          title: a.title,
+          description: (a.details && a.details.trim().length > 0 ? a.details : a.body) || '',
+          link: '/news'
+        })) : [];
+        const anns = annsAll.sort((x, y) => new Date(y.date) - new Date(x.date)).slice(0, 2);
+
+        const evtsAll = (evtRes.status === 'success' && Array.isArray(evtRes.events)) ? evtRes.events.map((e) => ({
+          id: `e-${e.id}`,
+          type: 'event',
+          badge: 'School Events and Activities',
+          date: e.event_date,
+          title: e.title,
+          description: (e.details && e.details.trim().length > 0 ? e.details : e.description) || '',
+          link: '/news'
+        })) : [];
+        const evts = evtsAll.sort((x, y) => new Date(y.date) - new Date(x.date)).slice(0, 2);
+
+        const achsAll = (achRes.status === 'success' && Array.isArray(achRes.achievements)) ? achRes.achievements.map((c) => ({
+          id: `c-${c.id}`,
+          type: 'achievement',
+          badge: 'Achievements and Press Releases',
+          date: c.achievement_date,
+          title: c.title,
+          description: (c.details && c.details.trim().length > 0 ? c.details : c.description) || '',
+          link: '/news'
+        })) : [];
+        const achs = achsAll.sort((x, y) => new Date(y.date) - new Date(x.date)).slice(0, 2);
+
+        const combined = [...anns, ...evts, ...achs]
+          .sort((x, y) => new Date(y.date) - new Date(x.date));
+
+        setNewsData(combined);
+      } catch (e) {
+        setNewsError('Failed to load latest news');
+      } finally {
+        setNewsLoading(false);
+      }
+    };
+    loadAll();
+  }, []);
+
   // Auto-play functionality
   useEffect(() => {
-    if (!isPaused) {
+    if (!isPaused && newsData.length > 0) {
       const interval = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % newsData.length);
       }, 4000); // Change slide every 4 seconds
@@ -89,14 +114,41 @@ const HomePage = () => {
     setCurrentIndex(index);
   };
 
+  // helpers for rendering
+  const truncate = (text, maxLen) => {
+    if (!text) return '';
+    return text.length > maxLen ? `${text.slice(0, maxLen - 1)}…` : text;
+  };
+
+  const formatMonthYear = (iso) => {
+    try {
+      const d = new Date(iso);
+      return d.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+    } catch {
+      return iso;
+    }
+  };
+
   return (
     <div className="homepage"> <Navbar /> 
       <div className="homepage-content">
         <div className="hero-section">
-          <div className="mayor-container">
+          <div className={`mayor-container${isMobile && isMayorOpen ? ' open' : ''}`}
+            onClick={() => { if (isMobile) setIsMayorOpen(true); }}
+          >
             <img src="/images/mayor.jpg" alt="Mayor of Bayawan" className="mayor-image" />
             <div className="mayor-label">Mayor's Welcome Message</div>
             <div className="mayor-tooltip">
+              {isMobile && (
+                <button
+                  type="button"
+                  className="mayor-close"
+                  aria-label="Close"
+                  onClick={(e) => { e.stopPropagation(); setIsMayorOpen(false); }}
+                >
+                  ×
+                </button>
+              )}
               <div className="tooltip-header">
                 <h4>John T. Raymond Jr.</h4>
                 <p>Mayor of Bayawan City</p>
@@ -111,10 +163,17 @@ const HomePage = () => {
               </div>
             </div>
           </div>
+          {isMobile && isMayorOpen && (
+            <div
+              className="mayor-overlay"
+              onClick={() => setIsMayorOpen(false)}
+              aria-hidden="true"
+            />
+          )}
           <div className="hero-content" style={{
-            marginLeft: isMobile ? 'auto' : 'auto',
-            marginRight: isMobile ? 'auto' : '80px',
-            textAlign: isMobile ? 'center' : 'right',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            textAlign: 'center',
             maxWidth: '800px'
           }}>
             <h1 className="hero-title" style={{ textAlign: isMobile ? 'center' : 'center' }}>WELCOME TO</h1>
@@ -198,12 +257,27 @@ const HomePage = () => {
                   className="news-carousel-track"
                   style={{ transform: `translateX(-${currentIndex * 100}%)` }}
                 >
-                  {newsData.map((news, index) => (
+                  {newsLoading ? (
+                    <div className="news-carousel-slide">
+                      <div className="news-card"><p style={{color:'#fff'}}>Loading latest news...</p></div>
+                    </div>
+                  ) : newsError ? (
+                    <div className="news-carousel-slide">
+                      <div className="news-card"><p>{newsError}</p></div>
+                    </div>
+                  ) : newsData.length === 0 ? (
+                    <div className="news-carousel-slide">
+                      <div className="news-card"><p>No announcements yet. Check back soon.</p></div>
+                    </div>
+                  ) : newsData.map((news, index) => (
                     <div key={news.id} className="news-carousel-slide">
                       <div className="news-card">
-                        <div className="news-date">{news.date}</div>
-                        <h3>{news.title}</h3>
-                        <p>{news.description}</p>
+                        <div className={`news-type-badge ${
+                          news.type === 'announcement' ? 'type-announcement' : news.type === 'event' ? 'type-event' : 'type-achievement'
+                        }`}>{news.badge}</div>
+                        <div className="news-date">{formatMonthYear(news.date)}</div>
+                        <h3 className="news-title">{news.title}</h3>
+                        <p className="news-summary">{truncate(news.description, 160)}</p>
                         <a href={news.link} className="news-link">Read More →</a>
                       </div>
                     </div>

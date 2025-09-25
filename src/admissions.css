@@ -1,5 +1,163 @@
 /* Admissions Page Styles */
 
+/* Section Subtitle */
+.section-subtitle {
+  color: #666;
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Requirements Content */
+.requirements-content {
+  margin-top: 2rem;
+}
+
+.general-requirements {
+  margin-bottom: 2rem;
+}
+
+.general-requirements h3 {
+  color: #2d5a2d;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+}
+
+.general-requirements h3::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #2d5a2d, #ff8c00);
+  border-radius: 2px;
+}
+
+/* Enrollment Requirements Styling */
+.enrollment-requirements,
+.transferee-requirements {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.enrollment-requirements h4,
+.transferee-requirements h4 {
+  color: #1a472a;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #1a472a;
+  padding-bottom: 0.5rem;
+}
+
+.enrollment-requirements ul,
+.transferee-requirements ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.enrollment-requirements li,
+.transferee-requirements li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e9ecef;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #495057;
+}
+
+.enrollment-requirements li:last-child,
+.transferee-requirements li:last-child {
+  border-bottom: none;
+}
+
+.enrollment-requirements li:hover,
+.transferee-requirements li:hover {
+  background-color: #f1f3f4;
+  padding-left: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+/* Staggered animation delays for requirements */
+.enrollment-requirements {
+  animation-delay: 0.1s;
+}
+
+.transferee-requirements {
+  animation-delay: 0.2s;
+}
+
+/* Requirements Note */
+.requirements-note {
+  background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+  border: 1px solid #ffeaa7;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+  animation-delay: 0.3s;
+}
+
+.note-icon {
+  color: #856404;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.note-content h5 {
+  color: #856404;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  margin-top: 0;
+  text-align: left;
+}
+
+.note-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.note-content li {
+  color: #856404;
+  padding: 0.25rem 0;
+  position: relative;
+  padding-left: 1.25rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.note-content li::before {
+  content: 'ℹ';
+  color: #856404;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  font-size: 0.9rem;
+}
+
 /* Hero Section */
 .admissions-hero {
   background-image: url('../public/images/ccb.jpg');
@@ -61,6 +219,10 @@
   color: white;
 }
 
+.section-admissions {
+  padding: -40px 0 !important;
+}
+
 .admissions-section {
   padding-top: 1px;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -75,6 +237,7 @@
   display: flex;
   flex-direction: column;
   gap: 60px;
+  margin: 19px 0;
 }
 
 /* Section Headers */
@@ -82,11 +245,11 @@
 .process-section h2,
 .dates-section h2,
 .application-form-section h2 {
-  color: #2d5a2d;
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 30px;
   text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2d5a2d;
+  margin-bottom: 3rem;
   position: relative;
 }
 
@@ -99,8 +262,8 @@
   bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
+  width: 80px;
+  height: 4px;
   background: linear-gradient(90deg, #2d5a2d, #ff8c00);
   border-radius: 2px;
 }
@@ -234,7 +397,9 @@
 .date-item {
   display: flex;
   align-items: center;
-  gap: 20px;
+  flex-direction: column;
+  text-align: center;
+  gap: 12px;
   background: #fff;
   padding: 25px;
   border-radius: 15px;
@@ -260,6 +425,7 @@
   justify-content: center;
   color: #fff;
   transition: all 0.3s ease;
+  align-self: center;
 }
 
 .date-item:hover .date-icon {
@@ -272,6 +438,7 @@
   font-size: 1.1rem;
   font-weight: bold;
   margin-bottom: 5px;
+  text-align: center;
 }
 
 .date-text p {
@@ -279,6 +446,7 @@
   margin: 0;
   line-height: 1.4;
   font-size: 0.95rem;
+  text-align: center;
 }
 
 /* Application Form Section */
@@ -589,6 +757,18 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
   }
 }
 

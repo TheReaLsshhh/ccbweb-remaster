@@ -46,9 +46,50 @@ class ApiService {
         return this.makeRequest('/news-events/');
     }
 
+    // Get announcements
+    async getAnnouncements() {
+        return this.makeRequest('/announcements/');
+    }
+
+    // Get events
+    async getEvents() {
+        return this.makeRequest('/events/');
+    }
+
+    // Get achievements
+    async getAchievements() {
+        return this.makeRequest('/achievements/');
+    }
+
+    // Admin: Announcements CRUD
+    async createAnnouncement(payload) {
+        return this.makeRequest('/admin/announcements/', {
+            method: 'POST',
+            body: JSON.stringify(payload),
+        });
+    }
+
+    async updateAnnouncement(announcementId, payload) {
+        return this.makeRequest(`/admin/announcements/${announcementId}/`, {
+            method: 'PUT',
+            body: JSON.stringify(payload),
+        });
+    }
+
+    async deleteAnnouncement(announcementId) {
+        return this.makeRequest(`/admin/announcements/${announcementId}/delete/`, {
+            method: 'DELETE',
+        });
+    }
+
     // Get admissions information
     async getAdmissionsInfo() {
         return this.makeRequest('/admissions-info/');
+    }
+
+    // Get admissions important dates
+    async getAdmissionsImportantDates() {
+        return this.makeRequest('/admissions-important-dates/');
     }
 
     // Get downloads

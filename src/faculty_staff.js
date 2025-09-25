@@ -38,8 +38,11 @@ const FacultyStaff = () => {
       {/* Faculty & Staff Page Header */}
       <section className="faculty-staff-header">
         <div className="container">
-          <h1 className="page-title">Faculty & Staff Portal</h1>
-          <p className="page-subtitle">Essential resources and information for faculty and administrative staff</p>
+          <div className="hero-content">
+            <h1 className="hero-title">Faculty & Staff Portal</h1>
+            <p className="hero-subtitle">Essential resources and information for faculty and administrative staff</p>
+            <p className="hero-motto">Supporting Excellence in Teaching and Administration</p>
+          </div>
         </div>
       </section>
 
@@ -347,30 +350,90 @@ const FacultyStaff = () => {
                 <div className="admin-card">
                   <h4>Administrative Systems</h4>
                   <div className="admin-links">
-                    <button className="admin-link" onClick={() => alert('Student Information System - Coming Soon')}>Student Information System</button>
-                    <button className="admin-link" onClick={() => alert('Financial Management System - Coming Soon')}>Financial Management System</button>
-                    <button className="admin-link" onClick={() => alert('Inventory Management - Coming Soon')}>Inventory Management</button>
-                    <button className="admin-link" onClick={() => alert('Facility Booking System - Coming Soon')}>Facility Booking System</button>
+                    <button className="admin-link" onClick={() => alert('Student Information System - Coming Soon')}>
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      </svg>
+                      Student Information System
+                    </button>
+                    <button className="admin-link" onClick={() => alert('Financial Management System - Coming Soon')}>
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      </svg>
+                      Financial Management System
+                    </button>
+                    <button className="admin-link" onClick={() => alert('Inventory Management - Coming Soon')}>
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      </svg>
+                      Inventory Management
+                    </button>
+                    <button className="admin-link" onClick={() => alert('Facility Booking System - Coming Soon')}>
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      </svg>
+                      Facility Booking System
+                    </button>
                   </div>
                 </div>
                 
                 <div className="admin-card">
                   <h4>Communication Tools</h4>
                   <div className="admin-links">
-                    <button className="admin-link" onClick={() => alert('Email System - Coming Soon')}>Email System</button>
-                    <button className="admin-link" onClick={() => alert('Video Conferencing - Coming Soon')}>Video Conferencing</button>
-                    <button className="admin-link" onClick={() => alert('Internal Messaging - Coming Soon')}>Internal Messaging</button>
-                    <button className="admin-link" onClick={() => alert('Announcement Portal - Coming Soon')}>Announcement Portal</button>
+                    <button className="admin-link" onClick={() => alert('Email System - Coming Soon')}>
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                      </svg>
+                      Email System
+                    </button>
+                    <button className="admin-link" onClick={() => alert('Video Conferencing - Coming Soon')}>
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+                      </svg>
+                      Video Conferencing
+                    </button>
+                    <button className="admin-link" onClick={() => alert('Internal Messaging - Coming Soon')}>
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+                      </svg>
+                      Internal Messaging
+                    </button>
+                    <button className="admin-link" onClick={() => alert('Announcement Portal - Coming Soon')}>
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                      Announcement Portal
+                    </button>
                   </div>
                 </div>
                 
                 <div className="admin-card">
                   <h4>Support Services</h4>
                   <div className="admin-links">
-                    <button className="admin-link" onClick={() => alert('IT Support - Coming Soon')}>IT Support</button>
-                    <button className="admin-link" onClick={() => alert('Facilities Maintenance - Coming Soon')}>Facilities Maintenance</button>
-                    <button className="admin-link" onClick={() => alert('Security Services - Coming Soon')}>Security Services</button>
-                    <button className="admin-link" onClick={() => alert('Emergency Procedures - Coming Soon')}>Emergency Procedures</button>
+                    <button className="admin-link" onClick={() => alert('IT Support - Coming Soon')}>
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      </svg>
+                      IT Support
+                    </button>
+                    <button className="admin-link" onClick={() => alert('Facilities Maintenance - Coming Soon')}>
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 13L3.74 11 12 6.82 20.26 11 12 16z"/>
+                      </svg>
+                      Facilities Maintenance
+                    </button>
+                    <button className="admin-link" onClick={() => alert('Security Services - Coming Soon')}>
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                      </svg>
+                      Security Services
+                    </button>
+                    <button className="admin-link" onClick={() => alert('Emergency Procedures - Coming Soon')}>
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                      Emergency Procedures
+                    </button>
                   </div>
                 </div>
               </div>

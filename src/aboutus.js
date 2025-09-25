@@ -8,6 +8,8 @@ const AboutUs = () => {
   const [isTopBarVisible, setIsTopBarVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [activeSection, setActiveSection] = useState('history');
+  const [isMissionModalOpen, setIsMissionModalOpen] = useState(false);
+  const [selectedMission, setSelectedMission] = useState(null);
 
   // Scroll-based navbar visibility
   useEffect(() => {
@@ -41,6 +43,16 @@ const AboutUs = () => {
         behavior: 'smooth'
       });
     }
+  };
+
+  const openMissionModal = (payload) => {
+    setSelectedMission(payload);
+    setIsMissionModalOpen(true);
+  };
+
+  const closeMissionModal = () => {
+    setIsMissionModalOpen(false);
+    setSelectedMission(null);
   };
 
   return (
@@ -158,9 +170,15 @@ const AboutUs = () => {
       {/* Mission, Vision, and Core Values Section */}
       <section id="mission" className="about-section mission-section">
         <div className="container">
-          <h2 className="section-title">Mission, Vision, and Core Values</h2>
+          <h2 className="section-title">Mission, Vision, Core Values, and Goals</h2>
           <div className="mission-content">
-            <div className="mission-card">
+            <div className="mission-card" role="button" tabIndex={0}
+                 onClick={() => openMissionModal({
+                   title: 'Vision',
+                   content: 'By 2034, City College of Bayawan is the leading tertiary institution in the southern part of Negros Island Region.'
+                 })}
+                 onKeyDown={(e) => { if (e.key === 'Enter') openMissionModal({ title: 'Vision', content: 'By 2034, City College of Bayawan is the leading tertiary institution in the southern part of Negros Island Region.' }); }}
+            >
               <div className="mission-icon">
                 <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -168,13 +186,17 @@ const AboutUs = () => {
               </div>
               <h3>Vision</h3>
               <p>
-                To be a leading educational institution committed to academic excellence, 
-                innovation, and community development, producing competent and values-driven 
-                professionals who contribute to the progress of society.
+                By 2034, City College of Bayawan is the leading tertiary institution in the southern part of Negros Island Region.
               </p>
             </div>
             
-            <div className="mission-card">
+            <div className="mission-card" role="button" tabIndex={0}
+                 onClick={() => openMissionModal({
+                   title: 'Mission',
+                   content: 'City College of Bayawan is a center of quality education committed to produce innovative, service-oriented, and globally competitive graduates.'
+                 })}
+                 onKeyDown={(e) => { if (e.key === 'Enter') openMissionModal({ title: 'Mission', content: 'City College of Bayawan is a center of quality education committed to produce innovative, service-oriented, and globally competitive graduates.' }); }}
+            >
               <div className="mission-icon">
                 <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
@@ -182,13 +204,17 @@ const AboutUs = () => {
               </div>
               <h3>Mission</h3>
               <p>
-                To provide quality, accessible, and relevant education that empowers students 
-                with knowledge, skills, and values necessary for personal and professional 
-                success while fostering a culture of excellence, integrity, and social responsibility.
+                City College of Bayawan is a center of quality education committed to produce innovative, service-oriented, and globally competitive graduates.
               </p>
             </div>
             
-            <div className="mission-card">
+            <div className="mission-card" role="button" tabIndex={0}
+                 onClick={() => openMissionModal({
+                   title: 'Core Values',
+                   content: 'The City College of Bayawan adheres to: CHARACTER, COMPETENCE, BANKABILITY.'
+                 })}
+                 onKeyDown={(e) => { if (e.key === 'Enter') openMissionModal({ title: 'Core Values', content: 'The City College of Bayawan adheres to: CHARACTER, COMPETENCE, BANKABILITY.' }); }}
+            >
               <div className="mission-icon">
                 <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -196,26 +222,82 @@ const AboutUs = () => {
               </div>
               <h3>Core Values</h3>
               <div className="values-list">
+                <p>The City College of Bayawan adheres to the following core values:</p>
                 <div className="value-item">
-                  <strong>Excellence</strong> - Pursuing the highest standards in all endeavors
+                  <strong>C</strong> - CHARACTER
                 </div>
                 <div className="value-item">
-                  <strong>Integrity</strong> - Upholding honesty, transparency, and ethical behavior
+                  <strong>C</strong> - COMPETENCE
                 </div>
                 <div className="value-item">
-                  <strong>Innovation</strong> - Embracing creativity and continuous improvement
-                </div>
-                <div className="value-item">
-                  <strong>Service</strong> - Dedication to community development and social responsibility
-                </div>
-                <div className="value-item">
-                  <strong>Respect</strong> - Valuing diversity and promoting inclusive environment
+                  <strong>B</strong> - BANKABILITY
                 </div>
               </div>
             </div>
+
+            <div className="mission-card-goals" role="button" tabIndex={0}
+                 onClick={() => openMissionModal({
+                   title: 'Goals',
+                   content: 'A committed and highly qualified academic community; A high-quality and relevant programs; A culture of excellence and innovation; The generation and transference of knowledge; An impact on improving quality of life and sustainable development.'
+                 })}
+                 onKeyDown={(e) => { if (e.key === 'Enter') openMissionModal({ title: 'Goals', content: 'A committed and highly qualified academic community; A high-quality and relevant programs; A culture of excellence and innovation; The generation and transference of knowledge; An impact on improving quality of life and sustainable development.' }); }}
+            >
+              <div className="mission-icon">
+                <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+              <h3>Goals</h3>
+              <p>The City College of Bayawan by 2029 will be known by having:</p>
+              <ul className="goals-list">
+                <li>
+                  <span className="goal-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19l12-12-1.41-1.41z"/></svg>
+                  </span>
+                  A committed and highly qualified academic community true to its original objectives;
+                </li>
+                <li>
+                  <span className="goal-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19l12-12-1.41-1.41z"/></svg>
+                  </span>
+                  A high-quality and relevant undergraduates and professional academic program immersed in a globalized and localized context, inclusive to all regardless of economic and social condition;
+                </li>
+                <li>
+                  <span className="goal-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19l12-12-1.41-1.41z"/></svg>
+                  </span>
+                  A culture of excellence, quality and innovation in its academic and administrative processes;
+                </li>
+                <li>
+                  <span className="goal-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19l12-12-1.41-1.41z"/></svg>
+                  </span>
+                  The generation and transference of knowledge with scientific and technological pertinent contributions; and
+                </li>
+                <li>
+                  <span className="goal-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19l12-12-1.41-1.41z"/></svg>
+                  </span>
+                  An impact on improving the quality of people’s lives, ratifying its commitment to society and constructing a country that lives around peace and sustainable development.
+                </li>
+              </ul>
+            </div>
+
           </div>
         </div>
       </section>
+
+      {isMissionModalOpen && selectedMission && (
+        <div className="modal-overlay" role="dialog" aria-modal="true" onClick={closeMissionModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" aria-label="Close" onClick={closeMissionModal}>×</button>
+            <h3 className="modal-title">{selectedMission.title}</h3>
+            <div className="modal-body">
+              <p>{selectedMission.content}</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Organizational Chart Section */}
       <section id="org-chart" className="about-section org-chart-section">
@@ -402,6 +484,7 @@ const AboutUs = () => {
             
             <div className="facilities-list">
               <h3>Campus Facilities</h3>
+              <p className="facilities-subtitle">Explore our modern facilities designed to support academic excellence and student life</p>
               <div className="facilities-grid">
                 <div className="facility-card">
                   <div className="facility-icon">
@@ -409,8 +492,10 @@ const AboutUs = () => {
                       <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 13L3.74 11 12 6.82 20.26 11 12 16z"/>
                     </svg>
                   </div>
-                  <h4>Academic Buildings</h4>
-                  <p>Modern classrooms and lecture halls equipped with multimedia facilities</p>
+                  <div className="facility-content">
+                    <h4>Academic Buildings</h4>
+                    <p>Modern classrooms and lecture halls equipped with multimedia facilities, air conditioning, and comfortable seating for optimal learning environments.</p>
+                  </div>
                 </div>
                 
                 <div className="facility-card">
@@ -419,8 +504,10 @@ const AboutUs = () => {
                       <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/>
                     </svg>
                   </div>
-                  <h4>Library</h4>
-                  <p>Comprehensive collection of books, journals, and digital resources</p>
+                  <div className="facility-content">
+                    <h4>Library & Learning Center</h4>
+                    <p>Comprehensive collection of books, journals, and digital resources with quiet study areas, group study rooms, and computer workstations.</p>
+                  </div>
                 </div>
                 
                 <div className="facility-card">
@@ -429,8 +516,10 @@ const AboutUs = () => {
                       <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
                     </svg>
                   </div>
-                  <h4>Computer Laboratories</h4>
-                  <p>State-of-the-art computer labs with latest software and equipment</p>
+                  <div className="facility-content">
+                    <h4>Computer Laboratories</h4>
+                    <p>State-of-the-art computer labs with latest software, high-speed internet, and modern equipment for hands-on learning and research.</p>
+                  </div>
                 </div>
                 
                 <div className="facility-card">
@@ -439,8 +528,10 @@ const AboutUs = () => {
                       <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                     </svg>
                   </div>
-                  <h4>Student Center</h4>
-                  <p>Multi-purpose facility for student activities and events</p>
+                  <div className="facility-content">
+                    <h4>Student Center</h4>
+                    <p>Multi-purpose facility for student activities, events, meetings, and social gatherings with modern amenities and flexible spaces.</p>
+                  </div>
                 </div>
                 
                 <div className="facility-card">
@@ -449,8 +540,10 @@ const AboutUs = () => {
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                     </svg>
                   </div>
-                  <h4>Sports Facilities</h4>
-                  <p>Basketball court, volleyball court, and other sports amenities</p>
+                  <div className="facility-content">
+                    <h4>Sports & Recreation</h4>
+                    <p>Basketball court, volleyball court, and other sports amenities for physical fitness and recreational activities for students and staff.</p>
+                  </div>
                 </div>
                 
                 <div className="facility-card">
@@ -459,8 +552,10 @@ const AboutUs = () => {
                       <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                     </svg>
                   </div>
-                  <h4>Cafeteria</h4>
-                  <p>Clean and comfortable dining area with affordable meals</p>
+                  <div className="facility-content">
+                    <h4>Cafeteria & Dining</h4>
+                    <p>Clean and comfortable dining area with affordable meals, snacks, and beverages to fuel students throughout their academic day.</p>
+                  </div>
                 </div>
               </div>
             </div>

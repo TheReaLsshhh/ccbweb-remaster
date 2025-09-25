@@ -39,7 +39,7 @@ const Downloads = () => {
       <Navbar isTopBarVisible={isTopBarVisible} />
 
       {/* Downloads Hero Section */}
-      <section className={`admissions-hero ${!isTopBarVisible ? 'navbar-collapsed' : ''}`}>
+      <section className={`news-hero ${!isTopBarVisible ? 'navbar-collapsed' : ''}`}>
         <div className="container">
           <div className="hero-content">
             <h1 className="hero-title">Downloads</h1>
@@ -66,43 +66,30 @@ const Downloads = () => {
                   <path d="M10 9H8"/>
                 </svg>
               </div>
-              <h3>Enrollment Forms</h3>
+              <h3>Enrollment</h3>
+              <p className="category-description">These relate to student registration and academic load:</p>
               <div className="download-links">
                 <button 
                   className="download-link"
-                  onClick={() => handleDownload('Application Form', 'PDF')}
+                  onClick={() => handleDownload('Enrollment Load Form', 'PDF')}
                 >
                   <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                     <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
                   </svg>
-                  Application Form
+                  <div className="download-link-content">
+                    <strong>Enrollment Load Form</strong>
+                  </div>
                 </button>
                 <button 
                   className="download-link"
-                  onClick={() => handleDownload('Enrollment Form', 'PDF')}
+                  onClick={() => handleDownload('Load Slip', 'PDF')}
                 >
                   <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                     <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
                   </svg>
-                  Enrollment Form
-                </button>
-                <button 
-                  className="download-link"
-                  onClick={() => handleDownload('Registration Form', 'PDF')}
-                >
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                    <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
-                  </svg>
-                  Registration Form
-                </button>
-                <button 
-                  className="download-link"
-                  onClick={() => handleDownload('Change of Program Form', 'PDF')}
-                >
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                    <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
-                  </svg>
-                  Change of Program Form
+                  <div className="download-link-content">
+                    <strong>Load Slip</strong>
+                  </div>
                 </button>
               </div>
             </div>
@@ -113,43 +100,30 @@ const Downloads = () => {
                   <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
               </div>
-              <h3>Clearance Forms</h3>
+              <h3>Clearance</h3>
+              <p className="category-description">These are likely used for approvals or exits:</p>
               <div className="download-links">
                 <button 
                   className="download-link"
-                  onClick={() => handleDownload('Student Clearance Form', 'PDF')}
+                  onClick={() => handleDownload('COPC Compilation', 'PDF')}
                 >
                   <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                     <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
                   </svg>
-                  Student Clearance Form
+                  <div className="download-link-content">
+                    <strong>COPC Compilation</strong>
+                  </div>
                 </button>
                 <button 
                   className="download-link"
-                  onClick={() => handleDownload('Exit Clearance Form', 'PDF')}
+                  onClick={() => handleDownload('EF Continuing', 'PDF')}
                 >
                   <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                     <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
                   </svg>
-                  Exit Clearance Form
-                </button>
-                <button 
-                  className="download-link"
-                  onClick={() => handleDownload('Library Clearance Form', 'PDF')}
-                >
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                    <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
-                  </svg>
-                  Library Clearance Form
-                </button>
-                <button 
-                  className="download-link"
-                  onClick={() => handleDownload('Financial Clearance Form', 'PDF')}
-                >
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                    <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
-                  </svg>
-                  Financial Clearance Form
+                  <div className="download-link-content">
+                    <strong>EF Continuing</strong>
+                  </div>
                 </button>
               </div>
             </div>
@@ -160,43 +134,19 @@ const Downloads = () => {
                   <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
                 </svg>
               </div>
-              <h3>Leave Forms</h3>
+              <h3>Request</h3>
+              <p className="category-description">These involve formal requests or documentation:</p>
               <div className="download-links">
                 <button 
                   className="download-link"
-                  onClick={() => handleDownload('Leave of Absence Form', 'PDF')}
+                  onClick={() => handleDownload('Request Slip', 'PDF')}
                 >
                   <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                     <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
                   </svg>
-                  Leave of Absence Form
-                </button>
-                <button 
-                  className="download-link"
-                  onClick={() => handleDownload('Medical Leave Form', 'PDF')}
-                >
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                    <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
-                  </svg>
-                  Medical Leave Form
-                </button>
-                <button 
-                  className="download-link"
-                  onClick={() => handleDownload('Emergency Leave Form', 'PDF')}
-                >
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                    <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
-                  </svg>
-                  Emergency Leave Form
-                </button>
-                <button 
-                  className="download-link"
-                  onClick={() => handleDownload('Maternity Leave Form', 'PDF')}
-                >
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                    <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
-                  </svg>
-                  Maternity Leave Form
+                  <div className="download-link-content">
+                    <strong>Request Slip</strong>
+                  </div>
                 </button>
               </div>
             </div>
@@ -207,43 +157,19 @@ const Downloads = () => {
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                 </svg>
               </div>
-              <h3>Other Forms</h3>
+              <h3>Shift / Change</h3>
+              <p className="category-description">Used for schedule or program adjustments:</p>
               <div className="download-links">
                 <button 
                   className="download-link"
-                  onClick={() => handleDownload('Transcript Request Form', 'PDF')}
+                  onClick={() => handleDownload('Shift Form', 'PDF')}
                 >
                   <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                     <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
                   </svg>
-                  Transcript Request Form
-                </button>
-                <button 
-                  className="download-link"
-                  onClick={() => handleDownload('Certificate Request Form', 'PDF')}
-                >
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                    <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
-                  </svg>
-                  Certificate Request Form
-                </button>
-                <button 
-                  className="download-link"
-                  onClick={() => handleDownload('Scholarship Application Form', 'PDF')}
-                >
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                    <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
-                  </svg>
-                  Scholarship Application Form
-                </button>
-                <button 
-                  className="download-link"
-                  onClick={() => handleDownload('Grievance Form', 'PDF')}
-                >
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                    <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
-                  </svg>
-                  Grievance Form
+                  <div className="download-link-content">
+                    <strong>Shift Form</strong>
+                  </div>
                 </button>
               </div>
             </div>
