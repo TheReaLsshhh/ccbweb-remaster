@@ -5,6 +5,7 @@ import Footer from './components/footer';
 import ScrollToTop from './components/ScrollToTop';
 
 const ContactUs = () => {
+  const API_BASE = process.env.REACT_APP_API_BASE || 'http://127.0.0.1:8000';
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,6 +15,7 @@ const ContactUs = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -27,20 +29,33 @@ const ContactUs = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('');
-
+    setErrorMessage('');
+  
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: ''
+      const response = await fetch(`${API_BASE}/api/contact/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
+      
+      let result = {};
+      try {
+        result = await response.json();
+      } catch (_) {}
+
+      if (response.ok && result.status === "success") {
+        setSubmitStatus("success");
+        setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+      } else {
+        const msg = (result && (result.message || result.detail)) || response.statusText || 'Unknown error';
+        setErrorMessage(msg);
+        setSubmitStatus("error");
+      }
     } catch (error) {
-      setSubmitStatus('error');
+      setErrorMessage(error?.message || 'Network error');
+      setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
     }
@@ -78,7 +93,8 @@ const ContactUs = () => {
                   </div>
                   <h3>Address</h3>
                   <p>City College of Bayawan<br />
-                  Bayawan City, Negros Oriental<br />
+                  Government Center, Banga, Bayawan City<br />
+                  Negros Oriental<br/>(035) 430-0263<br />
                   Philippines 6221</p>
                 </div>
 
@@ -89,9 +105,9 @@ const ContactUs = () => {
                     </svg>
                   </div>
                   <h3>Phone</h3>
-                  <p>Main Office: (035) 422-1234<br />
-                  Registrar: (035) 422-1235<br />
-                  Student Affairs: (035) 422-1236</p>
+                  <p>Main Office: (035) xxx-xxxx<br />
+                  Registrar: (035) xxx-xxxx<br />
+                  Student Affairs: (035) xxx-xxx</p>
                 </div>
 
                 <div className="contact-card">
@@ -101,9 +117,8 @@ const ContactUs = () => {
                     </svg>
                   </div>
                   <h3>Email</h3>
-                  <p>info@ccbayawan.edu.ph<br />
-                  registrar@ccbayawan.edu.ph<br />
-                  admissions@ccbayawan.edu.ph</p>
+                  <p className='ccbemail'>citycollegeofbayawan<br/>@gmail.com<br /></p>
+                  <p className='registraremail'>ccbregistrar@gmail.com<br /></p>
                 </div>
 
                 <div className="contact-card">
@@ -113,8 +128,8 @@ const ContactUs = () => {
                     </svg>
                   </div>
                   <h3>Office Hours</h3>
-                  <p>Monday - Friday: 8:00 AM - 5:00 PM<br />
-                  Saturday: 8:00 AM - 12:00 PM<br />
+                  <p>Monday - Friday:<br/>8:00 AM - 5:00 PM<br />
+                  Saturday: Closed<br />
                   Sunday: Closed</p>
                 </div>
               </div>
@@ -212,7 +227,7 @@ const ContactUs = () => {
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                       <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
                     </svg>
-                    Sorry, there was an error sending your message. Please try again.
+                    Sorry, there was an error sending your message. {errorMessage ? `(${errorMessage})` : 'Please try again.'}
                   </div>
                 )}
 

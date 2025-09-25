@@ -16,6 +16,8 @@ urlpatterns = [
     path('api/admissions-important-dates/', views.api_admissions_important_dates, name='api_admissions_important_dates'),
     path('api/downloads/', views.api_downloads, name='api_downloads'),
     path('api/contact-form/', views.api_contact_form, name='api_contact_form'),
+    path('api/contact/', views.contact, name='contact'),
+    path('api/contact/verify/', views.api_contact_verify, name='api_contact_verify'),
     
     # Admin-only CRUD endpoints for Academic Programs
     path('api/admin/academic-programs/', views.api_create_academic_program, name='api_create_academic_program'),

@@ -176,3 +176,59 @@ class Achievement(models.Model):
     def formatted_date(self):
         """Return formatted date for display"""
         return self.achievement_date.strftime('%B %d, %Y')
+
+
+class ContactSubmission(models.Model):
+    SUBJECT_CHOICES = [
+        ('admissions', 'Admissions Inquiry'),
+        ('academics', 'Academic Programs'),
+        ('student-services', 'Student Services'),
+        ('faculty', 'Faculty & Staff'),
+        ('general', 'General Information'),
+        ('complaint', 'Complaint'),
+        ('suggestion', 'Suggestion'),
+        ('other', 'Other'),
+    ]
+
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('verified', 'Verified'),
+        ('replied', 'Replied'),
+        ('closed', 'Closed'),
+    ]
+
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20, blank=True)
+    subject = models.CharField(max_length=50, choices=SUBJECT_CHOICES)
+    message = models.TextField()
+    verification_token = models.CharField(max_length=64, unique=True, blank=True)
+    is_verified = models.BooleanField(default=False)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    created_at = models.DateTimeField(auto_now_add=True)
+    verified_at = models.DateTimeField(null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Contact Submission'
+        verbose_name_plural = 'Contact Submissions'
+
+    def __str__(self):
+        return f"{self.name} <{self.email}> ({self.subject})"
+
+
+class EmailVerification(models.Model):
+    email = models.EmailField()
+    token = models.CharField(max_length=64, unique=True)
+    is_used = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Email Verification'
+        verbose_name_plural = 'Email Verifications'
+
+    def __str__(self):
+        return f"{self.email} ({'used' if self.is_used else 'new'})"

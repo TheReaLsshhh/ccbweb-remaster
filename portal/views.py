@@ -6,9 +6,40 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.core.mail import send_mail, EmailMessage
+from django.utils.crypto import get_random_string
+from django.utils import timezone
+import socket
+from django.conf import settings
+
+
+def _compute_lan_base_url() -> str:
+    """Return a best-effort base URL using the host's LAN IP on port 8000.
+    Prefers addresses like 192.168.44.x when available.
+    """
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        ip = s.getsockname()[0]
+        s.close()
+    except Exception:
+        ip = "127.0.0.1"
+    return f"http://{ip}:8000"
+
+
+def _compute_frontend_base_url() -> str:
+    """Return a best-effort frontend base URL using LAN IP on port 3000."""
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        ip = s.getsockname()[0]
+        s.close()
+    except Exception:
+        ip = "127.0.0.1"
+    return f"http://{ip}:3000"
 import os
 import json
-from .models import AcademicProgram, ProgramSpecialization, AdmissionsImportantDate, Announcement, Event, Achievement
+from .models import AcademicProgram, ProgramSpecialization, AdmissionsImportantDate, Announcement, Event, Achievement, ContactSubmission, EmailVerification
 
 def index(request):
     """Serve React frontend"""
@@ -431,25 +462,56 @@ def api_achievements(request):
 @require_http_methods(["POST"])
 @csrf_exempt
 def api_contact_form(request):
-    """Handle contact form submissions"""
+    """Create pending submission and email verification link to the user."""
     try:
         data = json.loads(request.body)
         name = data.get('name', '')
         email = data.get('email', '')
         message = data.get('message', '')
-        
-        # Here you would typically save to database or send email
-        # For now, we'll just return success
-        
-        return JsonResponse({
-            'status': 'success',
-            'message': 'Thank you for your message. We will get back to you soon!'
-        })
+        subject = data.get('subject', 'general')
+        phone = data.get('phone', '')
+
+        if not name or not email or not message or not subject:
+            return JsonResponse({'status': 'error', 'message': 'Missing required fields'}, status=400)
+
+        token = get_random_string(48)
+        ContactSubmission.objects.create(
+            name=name,
+            email=email,
+            phone=phone,
+            subject=subject,
+            message=message,
+            verification_token=token,
+        )
+
+        EmailVerification.objects.create(
+            email=email,
+            token=token,
+            expires_at=timezone.now() + timezone.timedelta(hours=24),
+        )
+
+        verify_base = os.getenv('PUBLIC_BASE_URL', _compute_lan_base_url())
+        verify_link = f"{verify_base}/api/contact/verify/?token={token}"
+
+        try:
+            msg = EmailMessage(
+                subject="Verify your email to send your message to City College of Bayawan",
+                body=(
+                    f"Hello {name},\n\n"
+                    "Please confirm your email address to send your message to City College of Bayawan.\n\n"
+                    f"Verification link: {verify_link}\n\n"
+                    "This link expires in 24 hours. If you did not request this, please ignore this email.\n"
+                ),
+                from_email=None,
+                to=[email],
+            )
+            msg.send(fail_silently=False)
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': f'Failed to send verification email: {str(e)}'}, status=500)
+
+        return JsonResponse({'status': 'success', 'message': 'Verification email sent. Please check your inbox.'})
     except json.JSONDecodeError:
-        return JsonResponse({
-            'status': 'error',
-            'message': 'Invalid JSON data'
-        }, status=400)
+        return JsonResponse({'status': 'error', 'message': 'Invalid JSON data'}, status=400)
 
 # Admin-only CRUD operations for Academic Programs
 @require_http_methods(["POST"])
@@ -844,3 +906,131 @@ class ReactAppView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'CCB Portal'
         return context
+
+
+@csrf_exempt
+def contact(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        name = data.get("name")
+        email = data.get("email")
+        phone = data.get("phone")
+        subject = data.get("subject")
+        message = data.get("message")
+
+        # Mirror the same verification flow for SPA endpoint
+        token = get_random_string(48)
+        ContactSubmission.objects.create(
+            name=name or '',
+            email=email or '',
+            phone=phone or '',
+            subject=subject or 'general',
+            message=message or '',
+            verification_token=token,
+        )
+
+        EmailVerification.objects.create(
+            email=email or '',
+            token=token,
+            expires_at=timezone.now() + timezone.timedelta(hours=24),
+        )
+
+        verify_base = os.getenv('PUBLIC_BASE_URL', _compute_lan_base_url())
+        verify_link = f"{verify_base}/api/contact/verify/?token={token}"
+
+        try:
+            msg = EmailMessage(
+                subject="Verify your email to send your message to City College of Bayawan",
+                body=(
+                    f"Hello {name},\n\n"
+                    "Please confirm your email address to send your message to City College of Bayawan.\n\n"
+                    f"Verification link: {verify_link}\n\n"
+                    "This link expires in 24 hours. If you did not request this, please ignore this email.\n"
+                ),
+                from_email=None,
+                to=[email],
+            )
+            msg.send(fail_silently=False)
+            return JsonResponse({"status": "success", "message": "Verification email sent. Please check your inbox."})
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": f"Failed to send verification email: {str(e)}"}, status=500)
+
+    return JsonResponse({"status": "error", "message": "Invalid request"}, status=400)
+
+
+@require_http_methods(["GET"])
+def api_contact_verify(request):
+    token = request.GET.get('token', '')
+    if not token:
+        if 'text/html' in request.META.get('HTTP_ACCEPT', '') or request.GET.get('format') == 'html':
+            return render(request, 'verify_result.html', {
+                'ok': False,
+                'title': 'Verification Error',
+                'message': 'Missing token'
+            }, status=400)
+        return JsonResponse({'status': 'error', 'message': 'Missing token'}, status=400)
+
+    try:
+        verification = EmailVerification.objects.get(token=token, is_used=False)
+        if verification.expires_at < timezone.now():
+            return JsonResponse({'status': 'error', 'message': 'Token expired'}, status=400)
+
+        submission = ContactSubmission.objects.get(verification_token=token)
+
+        display_from = f"{submission.name} via CCB <{getattr(settings, 'DEFAULT_FROM_EMAIL', None) or ''}>"
+        admin_msg = EmailMessage(
+            subject=f"[Contact Form] {submission.subject}",
+            body=(
+                f"From: {submission.name}\n"
+                f"Email: {submission.email}\n"
+                f"Phone: {submission.phone}\n\n"
+                f"Message:\n{submission.message}"
+            ),
+            from_email=display_from if getattr(settings, 'DEFAULT_FROM_EMAIL', None) else None,
+            to=[os.getenv('CONTACT_INBOX', 'citycollegeofbayawan@gmail.com')],
+            reply_to=[submission.email] if submission.email else None,
+        )
+        admin_msg.send(fail_silently=False)
+
+        verification.is_used = True
+        verification.save(update_fields=['is_used'])
+        submission.is_verified = True
+        submission.status = 'verified'
+        submission.verified_at = timezone.now()
+        submission.save(update_fields=['is_verified', 'status', 'verified_at'])
+
+        if 'text/html' in request.META.get('HTTP_ACCEPT', '') or request.GET.get('format') == 'html':
+            return render(request, 'verify_result.html', {
+                'ok': True,
+                'title': 'Verified',
+                'message': 'Your email has been verified and your message was sent.',
+                'home_url': os.getenv('FRONTEND_BASE_URL', _compute_frontend_base_url())
+            })
+        return JsonResponse({'status': 'success', 'message': 'Verification successful. Your message has been sent.'})
+    except EmailVerification.DoesNotExist:
+        if 'text/html' in request.META.get('HTTP_ACCEPT', '') or request.GET.get('format') == 'html':
+            return render(request, 'verify_result.html', {
+                'ok': False,
+                'title': 'Verification Error',
+                'message': 'Invalid or already used token',
+                'home_url': os.getenv('FRONTEND_BASE_URL', _compute_frontend_base_url())
+            }, status=400)
+        return JsonResponse({'status': 'error', 'message': 'Invalid or already used token'}, status=400)
+    except ContactSubmission.DoesNotExist:
+        if 'text/html' in request.META.get('HTTP_ACCEPT', '') or request.GET.get('format') == 'html':
+            return render(request, 'verify_result.html', {
+                'ok': False,
+                'title': 'Verification Error',
+                'message': 'Submission not found for token',
+                'home_url': os.getenv('FRONTEND_BASE_URL', _compute_frontend_base_url())
+            }, status=404)
+        return JsonResponse({'status': 'error', 'message': 'Submission not found for token'}, status=404)
+    except Exception as e:
+        if 'text/html' in request.META.get('HTTP_ACCEPT', '') or request.GET.get('format') == 'html':
+            return render(request, 'verify_result.html', {
+                'ok': False,
+                'title': 'Verification Error',
+                'message': str(e),
+                'home_url': os.getenv('FRONTEND_BASE_URL', _compute_frontend_base_url())
+            }, status=500)
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=500)

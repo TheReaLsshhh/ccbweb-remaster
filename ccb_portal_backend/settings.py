@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'portal',
+    'anymail',
 ]
 
 MIDDLEWARE = [
@@ -138,15 +140,40 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # CORS settings
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-]
+# In development, allow all origins so mobile/tablet (LAN IP) can access the API
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
+else:
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ]
 
 CORS_ALLOW_CREDENTIALS = True
 
 # WhiteNoise settings
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+# Email settings via Anymail (Brevo)
+EMAIL_BACKEND = "anymail.backends.brevo.EmailBackend"
+ANYMAIL = {
+    "BREVO_API_KEY": os.getenv("BREVO_API_KEY", "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"),
+    # Enable to see full request/response details in console for troubleshooting
+    "DEBUG_API_REQUESTS": True if os.getenv("ANYMAIL_DEBUG", "1") == "1" else False,
+}
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "citycollegeofbayawan@gmail.com")
+SERVER_EMAIL = os.getenv("SERVER_EMAIL", DEFAULT_FROM_EMAIL)
+
+# Fallback SMTP (optional) if Anymail not configured
+if not ANYMAIL["BREVO_API_KEY"]:
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = "smtp-relay.brevo.com"
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "97ce33001@smtp-brevo.com")
+    EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "FYNyxD3zspGUw7Wh")
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
