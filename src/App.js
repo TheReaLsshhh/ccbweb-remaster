@@ -10,6 +10,7 @@ import NewsEvents from './news_events';
 import Downloads from './downloads';
 import ContactUs from './contactuss';
 import CCBlogo from './CCBlogo';
+import AdminPage from './admin/admin';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/downloads" element={<Downloads />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/ccb-logo" element={<CCBlogo />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </Router>
   );

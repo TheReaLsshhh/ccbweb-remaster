@@ -1,0 +1,697 @@
+/* Navbar Container */
+.navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Top Orange Bar */
+.top-bar {
+  background-color: #ff8c00;
+  padding: 8px 0;
+  border-bottom: 1px solid #e67e00;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001; /* Higher than main navbar but lower than mobile menu */
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.top-bar-hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.top-bar-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.top-bar-container {
+  width: 100%;
+  margin: 0;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Top Bar Left - Date */
+.top-bar-left {
+  flex: 1;
+}
+
+.date-text {
+  color: black;
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 25px;
+}
+
+/* Top Bar Center - Navigation Links */
+.top-bar-center {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+}
+
+.top-bar-links {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.top-link {
+  color: #000;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.top-link:hover {
+  color: #fff;
+}
+
+/* Active top bar link styling */
+.top-link.active-top-link {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.separator {
+  color: #000;
+  font-weight: bold;
+}
+
+/* Top Bar Right - Login Section */
+.top-bar-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  /* gap: 16px; */
+}
+
+/* Top Bar Mobile Menu Button */
+.top-bar-mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 9998; /* High z-index to ensure it's always clickable */
+}
+
+.top-bar-mobile-menu-btn span {
+  width: 20px;
+  height: 2px;
+  background-color: #000;
+  margin: 2px 0;
+  transition: 0.3s;
+  border-radius: 1px;
+}
+
+/* Top Bar Mobile Menu Overlay */
+.top-bar-mobile-menu {
+  display: none;
+  position: fixed;
+  top: 44px; /* Position below the top bar */
+  left: 0;
+  right: 0;
+  background-color: #ff8c00;
+  border-top: 1px solid #e67e00;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 9999; /* Much higher than everything else to appear in front */
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.top-bar-mobile-menu.mobile-open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.top-bar-mobile-links {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 20px;
+  gap: 12px;
+}
+
+.top-bar-mobile-links a {
+  color: #000;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 10px 15px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.top-bar-mobile-links a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #fff;
+}
+
+.top-bar-mobile-links a.active-top-link {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+
+.login-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 4px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.login-section:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.user-icon {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  color: #fff;
+}
+
+.user-icon svg {
+  width: 12px;
+  height: 12px;
+}
+
+.login-text {
+  color: black;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Main Green Navigation Bar */
+.main-nav {
+  background-color: #2d5a2d;
+  padding: 10px 0 8px 0;
+  position: fixed;
+  top: 40px; /* Position directly below the orange top bar with no gap */
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Lower than top bar mobile menu to ensure it appears behind */
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: top 0.1s ease-in-out, padding 0.1s ease-in-out;
+  border: none;
+  outline: none;
+  will-change: top, padding;
+}
+
+.main-nav.expanded {
+  top: 0; /* Move to the very top when orange bar is hidden */
+  padding: 12px 0; /* Slightly increase padding to fill more space */
+  z-index: 1001; /* Higher than regular main nav but lower than mobile menu */
+  border: none;
+  outline: none;
+  background-color: #2d5a2d; /* Ensure background is solid */
+}
+
+.nav-container {
+  width: 100%;
+  margin: 0;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Brand Section */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Brand image logo */
+.brand-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  object-fit: cover;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.brand-text h1,
+.brand-text h2 {
+  margin: 0;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.brand-text h2 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.nav-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Active navigation styling - white background for current page */
+.nav-link.active-nav {
+  background-color: #fff;
+  color: #2d5a2d;
+  font-weight: bold;
+}
+
+.nav-link.active-nav .nav-icon svg {
+  color: #2d5a2d;
+}
+
+.nav-link.active-nav:hover {
+  background-color: #f0f0f0;
+  color: #2d5a2d;
+}
+
+/* CSS-based active state for different pages */
+.nav-link[href="/"]:active,
+.nav-link[href="/"]:focus {
+  background-color: #fff;
+  color: #2d5a2d;
+}
+
+.nav-link[href="/academics"]:active,
+.nav-link[href="/academics"]:focus {
+  background-color: #fff;
+  color: #2d5a2d;
+}
+
+.nav-link[href="/admissions"]:active,
+.nav-link[href="/admissions"]:focus {
+  background-color: #fff;
+  color: #2d5a2d;
+}
+
+.nav-link[href="/news"]:active,
+.nav-link[href="/news"]:focus {
+  background-color: #fff;
+  color: #2d5a2d;
+}
+
+.nav-link[href="/downloads"]:active,
+.nav-link[href="/downloads"]:focus {
+  background-color: #fff;
+  color: #2d5a2d;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 1004; /* Ensure button is always clickable */
+}
+
+.mobile-menu-btn span {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 3px 0;
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+.nav-search {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.search-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.search-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.search-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  display: none;
+  z-index: 1001;
+}
+
+.search-input {
+  width: 240px;
+  max-width: 70vw;
+  padding: 10px 12px;
+  border: 1px solid #d0d5dd;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+}
+
+/* Show popover on hover/focus */
+.nav-search:hover .search-popover,
+.nav-search:focus-within .search-popover {
+  display: block;
+}
+
+.search-btn svg {
+  width: 25px;
+  height: 25px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #2d5a2d;
+    flex-direction: column;
+    padding: 20px;
+    gap: 15px;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1005;
+  }
+
+  .nav-links.mobile-open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-link {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .brand-text h1,
+  .brand-text h2 {
+    font-size: 16px;
+  }
+
+  .brand-text h2 {
+    font-size: 14px;
+  }
+
+  .brand-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  /* Mobile responsive for top bar - compact layout */
+  .top-bar {
+    height: auto;
+    min-height: 56px;
+    padding: 8px 0;
+  }
+
+  .top-bar-container {
+    flex-direction: row;
+    gap: 0;
+    padding: 8px 15px;
+    height: auto;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .top-bar-left,
+  .top-bar-center,
+  .top-bar-right {
+    flex: none;
+    width: auto;
+  }
+
+  .top-bar-center {
+    order: 1;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .top-bar-left {
+    order: 2;
+    text-align: left;
+    flex: none;
+  }
+
+  .top-bar-right {
+    order: 3;
+    justify-content: flex-end;
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Show mobile menu button and hide regular links on mobile */
+  .top-bar-mobile-menu-btn {
+    display: flex;
+    position: static;
+    top: auto;
+    right: auto;
+    margin-left: 0;
+    order: 4;
+  }
+
+  .top-bar-links {
+    display: none; /* Hide regular links on mobile */
+  }
+
+  .top-bar-mobile-menu {
+    display: block; /* Show mobile menu container */
+    top: 56px; /* Adjust for mobile top bar height */
+  }
+
+  .top-bar-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .top-link {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+
+  .date-text {
+    font-size: 12px;
+    margin-right: 16px;
+    white-space: nowrap;
+  }
+
+  .login-text {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .nav-search {
+    width: 100%;
+    justify-content: center;
+    margin-top: 6px;
+  }
+
+  .search-popover {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .search-input {
+    width: 90vw;
+    max-width: 320px;
+  }
+
+  /* Adjust green navbar position for mobile */
+  .main-nav {
+    top: 56px; /* Adjust based on mobile orange bar height */
+  }
+
+  .main-nav.expanded {
+    top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-container {
+    padding: 0 15px;
+  }
+
+  .brand {
+    gap: 10px;
+  }
+
+  .brand-logo {
+    width: 45px;
+    height: 45px;
+  }
+
+  .brand-text h1,
+  .brand-text h2 {
+    font-size: 14px;
+  }
+
+  .brand-text h2 {
+    font-size: 12px;
+  }
+
+  .top-bar-container {
+    padding: 6px 15px;
+    gap: 0;
+  }
+
+  .top-bar {
+    min-height: 52px;
+  }
+
+  .main-nav {
+    top: 52px; /* Adjust for smaller mobile orange bar height */
+  }
+
+  .top-link {
+    font-size: 11px;
+    padding: 2px 4px;
+  }
+
+  .date-text {
+    font-size: 11px;
+  }
+
+  .login-text {
+    font-size: 11px;
+  }
+
+  /* Adjust mobile menu button position for smaller screens */
+  .top-bar-mobile-menu-btn {
+    margin-left: 0;
+  }
+
+  .top-bar-mobile-menu-btn span {
+    width: 18px;
+    height: 2px;
+    margin: 1.5px 0;
+  }
+
+  .top-bar-mobile-links {
+    padding: 12px 15px;
+    gap: 10px;
+  }
+
+  .top-bar-mobile-links a {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  /* Adjust mobile menu position for smaller screens */
+  .top-bar-mobile-menu {
+    top: 52px; /* Adjust for smaller mobile top bar height */
+  }
+
+  /* Ensure proper spacing on very small screens */
+  .top-bar-right {
+    gap: 8px;
+  }
+} 

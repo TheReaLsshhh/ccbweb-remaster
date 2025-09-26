@@ -158,7 +158,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Email settings via Anymail (Brevo)
 EMAIL_BACKEND = "anymail.backends.brevo.EmailBackend"
 ANYMAIL = {
-    "BREVO_API_KEY": os.getenv("BREVO_API_KEY", "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"),
+    "BREVO_API_KEY": os.getenv("BREVO_API_KEY", ""),
     # Enable to see full request/response details in console for troubleshooting
     "DEBUG_API_REQUESTS": True if os.getenv("ANYMAIL_DEBUG", "1") == "1" else False,
 }
