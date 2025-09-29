@@ -926,8 +926,8 @@
   
   .mayor-container {
     position: absolute;
-    top: calc(100vh - 410px);
-    right: 81%;
+    top: calc(100vh - 380px);
+    right: 85%;
     transform: translateX(50%);
     z-index: 15;
   }
