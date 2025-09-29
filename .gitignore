@@ -41,6 +41,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
+.npm
+.pnpm-debug.log*
 
 # React build
 build/
@@ -52,6 +54,12 @@ build/
 # Cache directories
 .cache/
 .parcel-cache/
+.eslintcache
+*.tsbuildinfo
+
+# Package manager lock files (keep package-lock.json but ignore others)
+yarn.lock
+pnpm-lock.yaml
 
 # IDE
 .vscode/
