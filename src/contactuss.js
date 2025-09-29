@@ -262,7 +262,7 @@ const ContactUs = () => {
             <h2>Find Us</h2>
             <div className="map-container">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d975.1279767218883!2d122.7891499178588!3d9.387085422981553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33ac93001a7a1fdd%3A0xbc6a4b9b655068bd!2sCity%20College%20of%20Bayawan!5e1!3m2!1sen!2sph!4v1758761366210!5m2!1sen!2sph" 
+                src="https://www.google.com/maps/embed?pb=!3m2!1sen!2sph!4v1758866941269!5m2!1sen!2sph!6m8!1m7!1sx4WnyHWIHbsjCdZ6yImCvw!2m2!1d9.38704492085048!2d122.7890689777979!3f295.35538269152806!4f-1.3072543479962206!5f0.7820865974627469" 
                 width="100%" 
                 height="450" 
                 style={{border: 0}} 
@@ -271,7 +271,7 @@ const ContactUs = () => {
                 referrerPolicy="no-referrer-when-downgrade"
                 title="City College of Bayawan Location"
               ></iframe>
-            </div>
+            </div>  
           </div>
         </div>
       </section>

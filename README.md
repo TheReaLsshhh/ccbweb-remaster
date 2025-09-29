@@ -1,147 +1,146 @@
-# City College of Bayawan - Official Website
+# CCB Web Portal
 
-A modern, responsive website for City College of Bayawan built with React.js.
+A modern web application for the College of Computer and Business (CCB) featuring a React frontend and Django backend.
 
-## 🎓 About
+## 🚀 Features
 
-This is the official website for City College of Bayawan, featuring a single-page design with smooth scrolling navigation and comprehensive information about academic programs, admissions, news, and downloads.
+- **Academic Programs**: Browse and explore available academic programs
+- **Admissions**: Information about admissions process and important dates
+- **Faculty & Staff**: Directory of faculty and staff members
+- **News & Events**: Latest announcements and upcoming events
+- **Student Portal**: Student-specific features and resources
+- **Downloads**: Access to important documents and forms
+- **Contact Us**: Get in touch with the college
+- **Admin Panel**: Administrative interface for content management
 
-## ✨ Features
+## 🛠️ Technology Stack
 
-- **Single-Page Design**: All content organized in one seamless page
-- **Smooth Scrolling Navigation**: Beautiful scroll animations between sections
-- **Responsive Design**: Works perfectly on all devices (desktop, tablet, mobile)
-- **Modern UI/UX**: Clean, professional design with hover effects and animations
-- **Academic Programs Showcase**: Detailed information about all degree programs
-- **Admissions Information**: Complete application process and requirements
-- **News & Events**: Latest updates and announcements
-- **Downloads Section**: Easy access to important documents and forms
+### Frontend
+- **React.js** - Modern UI framework
+- **CSS3** - Styling and responsive design
+- **JavaScript ES6+** - Interactive functionality
 
-## 🚀 Technologies Used
+### Backend
+- **Django** - Python web framework
+- **Django REST Framework** - API development
+- **SQLite/PostgreSQL** - Database management
 
-- **React.js**: Frontend framework
-- **CSS3**: Styling with modern features (Grid, Flexbox, Animations)
-- **HTML5**: Semantic markup
-- **JavaScript ES6+**: Modern JavaScript features
-- **Git**: Version control
+## 📋 Prerequisites
 
-## 📋 Sections
+- Node.js (v14 or higher)
+- Python (v3.8 or higher)
+- pip (Python package manager)
+- npm or yarn (Node package manager)
 
-1. **Home**: Hero section with college branding and call-to-action buttons
-2. **Academic Programs**: Four featured degree programs with specializations
-3. **Admissions**: Requirements and step-by-step application process
-4. **News & Events**: Latest college updates and announcements
-5. **Downloads**: Important documents and forms organized by category
-6. **Footer**: Contact information and quick links
+## 🚀 Quick Start
 
-## 🎨 Design Features
-
-- **Color Scheme**: Green (#2d5a2d) and Orange (#ff8c00) brand colors
-- **Background**: Custom college building image with gray overlay
-- **Typography**: Modern, readable fonts with proper hierarchy
-- **Animations**: Smooth transitions, hover effects, and scroll animations
-- **Cards**: Modern card design for programs, news, and downloads
-
-## 📱 Responsive Design
-
-- **Desktop**: Full-featured layout with all sections visible
-- **Tablet**: Optimized layout for medium screens
-- **Mobile**: Mobile-first design with collapsible navigation
-
-## 🛠️ Installation & Setup
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/TheReaLsshhh/ccbweb.git
-   cd ccbweb
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Start the development server**
-   ```bash
-   npm start
-   ```
-
-4. **Open your browser**
-   Navigate to `http://localhost:3000`
-
-## 📦 Build for Production
-
+### 1. Clone the Repository
 ```bash
+git clone <repository-url>
+cd ccbweb-main
+```
+
+### 2. Backend Setup
+```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# Windows:
+venv\Scripts\activate
+# macOS/Linux:
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run migrations
+python manage.py migrate
+
+# Create superuser (optional)
+python manage.py createsuperuser
+
+# Start Django server
+python manage.py runserver
+```
+
+### 3. Frontend Setup
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm start
+```
+
+### 4. Access the Application
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:8000
+- Admin Panel: http://localhost:8000/admin
+
+## 📁 Project Structure
+
+```
+ccbweb-main/
+├── src/                    # React frontend source code
+│   ├── components/         # Reusable React components
+│   ├── services/          # API service functions
+│   └── *.js               # Page components
+├── portal/                # Django app for portal functionality
+├── ccb_portal_backend/    # Django project settings
+├── static/                # Static files
+├── templates/             # Django templates
+├── migrations/            # Database migrations
+├── models.py              # Django models
+├── views.py               # Django views
+├── urls.py                # URL routing
+└── requirements.txt       # Python dependencies
+```
+
+## 🔧 Development
+
+### Running Tests
+```bash
+# Backend tests
+python manage.py test
+
+# Frontend tests
+npm test
+```
+
+### Building for Production
+```bash
+# Build React app
 npm run build
+
+# Collect static files
+python manage.py collectstatic
 ```
 
-## 🗂️ Project Structure
+## 📝 API Endpoints
 
-```
-ccb-portal/
-├── public/
-│   ├── images/
-│   │   ├── bg.png          # Background image
-│   │   └── ccb-logo.png    # College logo
-│   └── index.html
-├── src/
-│   ├── components/
-│   │   ├── Navbar.js       # Navigation component
-│   │   └── Navbar.css      # Navigation styles
-│   ├── index.js            # Main App component
-│   ├── index.css           # Global styles
-│   └── App.js
-├── package.json
-└── README.md
-```
-
-## 🎯 Key Components
-
-### Navbar Component
-- Fixed navigation with smooth scrolling
-- Mobile-responsive hamburger menu
-- Top bar with quick links and login
-- Main navigation with program sections
-
-### Main Content Sections
-- **Home Section**: Hero content with college branding
-- **Academic Programs**: Grid layout with program cards
-- **Admissions**: Two-column layout with requirements and process
-- **News & Events**: Card-based news layout
-- **Downloads**: Categorized download links
-
-## 🔧 Customization
-
-### Colors
-Update the color scheme in `src/index.css`:
-- Primary Green: `#2d5a2d`
-- Accent Orange: `#ff8c00`
-
-### Content
-- Update program information in `src/index.js`
-- Modify admission requirements and process
-- Add/remove news articles and download links
-
-### Images
-- Replace `public/images/bg.png` with your background image
-- Update `public/images/ccb-logo.png` with your logo
-
-## 📄 License
-
-This project is created for City College of Bayawan. All rights reserved.
+- `/api/programs/` - Academic programs
+- `/api/admissions/` - Admissions information
+- `/api/faculty/` - Faculty and staff data
+- `/api/events/` - News and events
+- `/api/announcements/` - College announcements
 
 ## 🤝 Contributing
 
-This is an official project for City College of Bayawan. For contributions or suggestions, please contact the college administration.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## 📞 Contact
+## 📄 License
 
-**City College of Bayawan**
-- Location: Bayawan City, Negros Oriental
-- Email: info@ccb.edu.ph
-- Phone: (035) XXX-XXXX
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 📞 Support
+
+For support and questions, please contact the development team or create an issue in the repository.
 
 ---
 
-**Honor and Excellence for the Highest Good**  
-*Honus et Excellentia Ad Summum Bonum*
+**College of Computer and Business (CCB)** - Empowering students through technology and business education.

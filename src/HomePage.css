@@ -818,7 +818,7 @@
   
   .mayor-container {
     position: absolute;
-    top: calc(100vh - 380px);
+    top: calc(100vh - 380px) !important;
     right: 85%;
     transform: translateX(50%);
     z-index: 15;
@@ -842,6 +842,7 @@
   .mayor-label {
     font-size: 0.7rem;
     padding: 6px 12px;
+    bottom: -25px;
   }
 }
 
@@ -850,8 +851,22 @@
   .homepage {
     margin-top: 80px;
     min-height: 100vh;
-    background: none;
+    background-image: url('../public/images/bg2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     position: relative;
+  }
+
+  .homepage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
   }
 
   .homepage-content {
@@ -859,20 +874,16 @@
     padding-top: 120px;
     position: relative;
     z-index: 2;
-  } 
-
-  .homepage::before {
-    position: fixed;
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../public/images/bg2.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 1;
   }
   
   .hero-section {
     padding: 40px 20px;
     min-height: 60vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
   
   .hero-title {
@@ -926,8 +937,8 @@
   
   .mayor-container {
     position: absolute;
-    top: calc(100vh - 380px);
-    right: 85%;
+    top: calc(100vh - 420px) !important;
+    right: 81%;
     transform: translateX(50%);
     z-index: 15;
   }
@@ -962,6 +973,7 @@
   .mayor-label {
     font-size: 0.6rem;
     padding: 5px 10px;
+    bottom: -18px;
   }
 }
 
